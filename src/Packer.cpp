@@ -30,8 +30,8 @@ void mpbp::Packer::Clear() noexcept
   this->page_count = 0;
   this->width = 0;
   this->height = 0;
-  this->top_page_width = 0;
-  this->top_page_height = 0;
+  this->top_bin_width = 0;
+  this->top_bin_height = 0;
 }
 
 void mpbp::Packer::SetSize(std::size_t max_width, std::size_t max_height)
@@ -56,9 +56,9 @@ std::size_t mpbp::Packer::GetMaxWidth() const noexcept { return this->max_width;
 
 std::size_t mpbp::Packer::GetMaxHeight() const noexcept { return this->max_height; }
 
-std::size_t mpbp::Packer::GetTopPageWidth() const noexcept { return this->top_page_width; }
+std::size_t mpbp::Packer::GetTopBinWidth() const noexcept { return this->top_bin_width; }
 
-std::size_t mpbp::Packer::GetTopPageHeight() const noexcept { return this->top_page_height; }
+std::size_t mpbp::Packer::GetTopBinHeight() const noexcept { return this->top_bin_height; }
 
 void mpbp::Packer::Pack(const std::span<mpbp::input_rect> input_rects)
 {
@@ -68,19 +68,27 @@ void mpbp::Packer::Pack(const std::span<mpbp::input_rect> input_rects)
   // Return if there is nothing to pack.
   if (input_rects.size() == 0) return;
   // Make sure the max page dimensions are nonzero.
-  if (this->max_page_width == 0 || this->max_page_height == 0)
+  if (this->max_width == 0 || this->max_height == 0)
   {
     throw std::runtime_error("invalid max page dimensions");
   }
   // Sort the input rects, largest to smallest.
   std::sort(input_rects.begin(), input_rects.end());
-  // Retrieve the largest input rect.
-  auto cur_rect_i = input_rects.size() - 1;
+  // Retrieve the smallest input rect.
+  auto cur_rect_i = 0;
   auto cur_rect = &input_rects[cur_rect_i];
+  // Determine if it has a 0 dimension.
+  if (cur_rect->is_degenerate())
+  {
+    throw std::runtime_error("one or more input rects are degenerate");
+  }
+  // Retrieve the largest input rect.
+  cur_rect_i = input_rects.size() - 1;
+  cur_rect = &input_rects[cur_rect_i];
   // Determine if the largest rect is too large for the max bin dimensions.
   if (cur_rect->width > this->max_width || cur_rect->height > this->max_height)
   {
-    throw std::runtime_error("one or more rects do not fit in bin");
+    throw std::runtime_error("one or more input rects do not fit in bin");
   }
   /*
       After this point, we know that packing can occur without issues.
@@ -97,14 +105,14 @@ void mpbp::Packer::Pack(const std::span<mpbp::input_rect> input_rects)
   }
   // Define some utility lambdas.
   auto top_page_i = [&]() -> std::size_t { return this->page_count - 1; };
-  auto next_rect = [&]() { cur_rect = &input_rects[--rect_i]; };
+  auto next_rect = [&]() { cur_rect = &input_rects[--cur_rect_i]; };
 /*
     Now, it is time to start placing...
 */
 // Create goto label to easily iterate to the next rect in the loop.
 PACK_LOOP_START:  // goto is normally frowned upon, except sometimes in situations like these...
   // Loop through all remaining input rects, largest to smallest.
-  while (rect_i != 0)
+  while (cur_rect_i != 0)
   {
     /*
         The first rect is always placed the same way.
@@ -119,8 +127,8 @@ PACK_LOOP_START:  // goto is normally frowned upon, except sometimes in situatio
       this->width = cur_rect->width;
       this->height = cur_rect->height;
       // Expand the top page to match the size of the current rect.
-      this->top_page_width = cur_rect->width;
-      this->top_page_height = cur_rect->height;
+      this->top_bin_width = cur_rect->width;
+      this->top_bin_height = cur_rect->height;
       // Restart the input rect placement loop to place the next input rect.
       goto PACK_LOOP_START;
     }
@@ -131,7 +139,7 @@ PACK_LOOP_START:  // goto is normally frowned upon, except sometimes in situatio
        space that the rect fits in.
     */
     // Loop through all spaces, smallest to largest.
-    for (std::size_t space_i = 0; space_i < spaces.size; space_i++)
+    for (std::size_t space_i = 0; space_i < spaces.size(); space_i++)
     {
       // Get the current space at space_i.
       auto& cur_space = this->spaces[space_i];
@@ -152,15 +160,14 @@ PACK_LOOP_START:  // goto is normally frowned upon, except sometimes in situatio
           if (cur_rect->width < cur_space.width)
           {
             // Place a space to the right that reaches down to the bottom of the rect.
-            this->spaces.emplace_back(cur_rect->FarX(), cur_rect->y, cur_space.z,
+            this->spaces.emplace_back(cur_rect->far_x() + 1, cur_rect->y, cur_space.z,
                                       cur_space.width - cur_rect->width, cur_rect->height);
-                        );
           }
           // If there is leftover space bellow the rect within the containing space...
           if (cur_rect->height < cur_space.height)
           {
             // Place a space bellow that reaches to the right of the containing space.
-            this->spaces.emplace_back(cur_rect->x, cur_rect->FarY(), cur_space.z, cur_space.width,
+            this->spaces.emplace_back(cur_rect->x, cur_rect->far_y() + 1, cur_space.z, cur_space.width,
                                       cur_space.height - cur_rect->height);
           }
         }
@@ -173,14 +180,14 @@ PACK_LOOP_START:  // goto is normally frowned upon, except sometimes in situatio
           {
             // Place a space to the right of the rect that reaches down to the bottom of the
             // containing space.
-            this->spaces.emplace_back(cur_rect->x, cur_rect->FarY(), cur_space.z, cur_space.width,
+            this->spaces.emplace_back(cur_rect->x, cur_rect->far_y() + 1, cur_space.z, cur_space.width,
                                       cur_space.height - cur_rect->height);
           }
           // If there is leftover space bellow the rect within the containing space...
           if (cur_rect->height < cur_space.height)
           {
             // Place a space bellow the rect that reaches only to the width of the rect.
-            this->spaces.emplace_back(cur_rect->x, cur_rect->FarY(), cur_space.z, cur_rect->width,
+            this->spaces.emplace_back(cur_rect->x, cur_rect->far_y() + 1, cur_space.z, cur_rect->width,
                                       cur_space.height - cur_rect->height);
           }
         }
@@ -189,7 +196,7 @@ PACK_LOOP_START:  // goto is normally frowned upon, except sometimes in situatio
            rect and new spaces.
         */
         // Overwrite the containing space with the last space in the spaces vector.
-        this->spaces[space_i] = this->spaces[space.size() - 1];
+        this->spaces[space_i] = this->spaces[this->spaces.size() - 1];
         // Remove the last space from the spaces vector.
         this->spaces.pop_back();
         // Sort the spaces vector from smallest to largest.
@@ -208,36 +215,36 @@ PACK_LOOP_START:  // goto is normally frowned upon, except sometimes in situatio
       // Define a lambda to place the rect to the right of the top page bin.
       auto place_rect_right = [&]()
       {
-        cur_rect->place(top_bin_width, 0, top_page_i());
-        this->top_page_width += cur_rect->width;
+        cur_rect->place(this->top_bin_width, 0, top_page_i());
+        this->top_bin_width += cur_rect->width;
         if (cur_rect->height <= this->top_bin_height)
         {
           spaces.emplace_back(cur_rect->x, cur_rect->height, top_page_i(), cur_rect->width,
-                              this->top_page_height - cur_rect->height);
+                              this->top_bin_height - cur_rect->height);
         }
         if (this->page_count == 1)
         {
-          this->width = this->top_page_width;
+          this->width = this->top_bin_width;
         }
       };
       // Define a lambda to place the rect to the bottom of the top page bin.
       auto place_rect_bellow = [&]()
       {
-        cur_rect->place(0, this->top_page_height, top_page_i());
-        this->top_page_height += cur_rect->height;
-        if (cur_rect->width <= top_bin_width)
+        cur_rect->place(0, this->top_bin_height, top_page_i());
+        this->top_bin_height += cur_rect->height;
+        if (cur_rect->width <= this->top_bin_width)
         {
           spaces.emplace_back(cur_rect->width, cur_rect->y, top_page_i(),
-                              this->top_page_width - cur_rect->width, cur_rect->height);
+                              this->top_bin_width - cur_rect->width, cur_rect->height);
         }
         if (this->page_count == 1)
         {
-          this->height = this->top_page_height;
+          this->height = this->top_bin_height;
         }
       };
       // Determine if the rect fits above or bellow the packed bin on the top page.
-      const auto fits_bellow = this->top_bin_height + cur_rect->height <= this->max_page_height;
-      const auto fits_right = this->top_bin_width + cur_rect->width <= this->max_page_width;
+      const auto fits_bellow = this->top_bin_height + cur_rect->height <= this->max_height;
+      const auto fits_right = this->top_bin_width + cur_rect->width <= this->max_width;
       /*
           Weight the placement choice based on the placed bin has a larger width or height.
       */
@@ -279,20 +286,23 @@ PACK_LOOP_START:  // goto is normally frowned upon, except sometimes in situatio
        space on the current page should be stored in the spaces vector.
      */
     // If there is remaining space to the right...
-    if (this->top_bin_width < this->max_page_width)
+    if (this->top_bin_width < this->max_height)
     {
       // Add a space for the remaining space to the right going all the way to the bottom of the
       // page.
-      this->spaces.emplace_back(this->top_bin_width, 0, this->max_page_width - this->top_bin_width,
-                                this->max_page_height, top_page_i());
+      this->spaces.emplace_back(this->top_bin_width, 0, this->max_width - this->top_bin_width,
+                                this->top_bin_height, top_page_i());
     }
     // If there is remaining space bellow...
-    if (this->top_bin_height < this->max_page_height)
+    if (this->top_bin_height < this->max_height)
     {
       // Add a space for the remaining space bellow reaching only to the width of the bin.
-      this->spaces.emplace - back(0, this->top_bin_height, this->top_bin_width,
-                                  this->max_page_height - this->top_bin_height, top_page_i());
+      this->spaces.emplace_back(0, this->top_bin_height, this->top_bin_width,
+                                  this->max_height - this->top_bin_height, top_page_i());
     }
+    // After the first page is done, the width and height of all pages is now the max.
+    this->width = this->max_width;
+    this->height = this->max_height;
     // Increment the page count.
     this->page_count++;
     // Place the rect at the top left corner of the new page.

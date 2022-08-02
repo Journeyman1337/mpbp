@@ -37,8 +37,8 @@ namespace mpbp
     std::size_t height = 0;
     std::size_t max_width = 0;
     std::size_t max_height = 0;
-    std::size_t top_page_width = 0;
-    std::size_t top_page_height = 0;
+    std::size_t top_bin_width = 0;
+    std::size_t top_bin_height = 0;
 
    public:
     constexpr Packer() noexcept = default;
@@ -51,8 +51,8 @@ namespace mpbp
     std::size_t GetHeight() const noexcept;
     std::size_t GetMaxWidth() const noexcept;
     std::size_t GetMaxHeight() const noexcept;
-    std::size_t GetTopPageWidth() const noexcept;
-    std::size_t GetTopPageHeight() const noexcept;
+    std::size_t GetTopBinWidth() const noexcept;
+    std::size_t GetTopBinHeight() const noexcept;
     void Pack(const std::span<mpbp::input_rect> input_rects);
   };
 }  // namespace mpbp
