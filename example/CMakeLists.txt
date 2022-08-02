@@ -17,8 +17,8 @@ target_link_libraries(mpbp_example
         mpbp
 )
 set_target_properties(mpbp_example
-    OUTPUT_NAME "mpbp example"
     PROPERTIES
+    OUTPUT_NAME "mpbp example"
     CXX_STANDARD ${MPBP_CXX_STANDARD}
     CXX_STANDARD_REQUIRED TRUE
 )
