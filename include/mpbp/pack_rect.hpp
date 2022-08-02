@@ -49,13 +49,14 @@ namespace mpbp
 
     constexpr std::size_t far_y() const noexcept { return this->y + this->height - 1; }
 
+    constexpr bool is_degenerate() const noexcept { return this->width == 0 || this->height == 0; }
 
     constexpr std::strong_ordering operator<=>(const mpbp::pack_rect& other) const noexcept
     {
       return this->area() <=> other.area();
     }
 
-    constexpr bool Fits(const mpbp::pack_rect& other) const noexcept
+    constexpr bool fits(const mpbp::pack_rect& other) const noexcept
     {
       return (this->width >= other.width) && (this->height >= other.height);
     }

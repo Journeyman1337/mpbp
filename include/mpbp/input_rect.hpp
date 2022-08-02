@@ -40,7 +40,7 @@ namespace mpbp
     {
     }
 
-    constexpr void Place(const std::size_t x, const std::size_t y, const std::size_t z) noexcept
+    constexpr void place(const std::size_t x, const std::size_t y, const std::size_t z) noexcept
     {
       this->x = x;
       this->y = y;
