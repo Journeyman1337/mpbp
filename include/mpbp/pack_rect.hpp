@@ -43,7 +43,7 @@ namespace mpbp
     {
     }
 
-    constexpr std::size_t area() const noexcept { return this->width * this->height; }
+    constexpr std::size_t max_dimension() const noexcept { return std::max(this->width, this->height); }
     
     constexpr std::size_t far_x() const noexcept { return this->x + this->width - 1; }
 
@@ -53,7 +53,7 @@ namespace mpbp
 
     constexpr std::strong_ordering operator<=>(const mpbp::pack_rect& other) const noexcept
     {
-      return this->area() <=> other.area();
+      return this->max_dimension() <=> other.max_dimension();
     }
 
     constexpr bool fits(const mpbp::pack_rect& other) const noexcept
