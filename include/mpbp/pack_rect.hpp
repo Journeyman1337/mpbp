@@ -27,31 +27,31 @@
 
 namespace mpbp
 {
-  struct pack_rect
-  {
-    std::size_t x = 0;
-    std::size_t y = 0;
-    std::size_t z = 0;
-    std::size_t width = 0;
-    std::size_t height = 0;
-
-    constexpr pack_rect() noexcept = default;
-
-    constexpr pack_rect(const std::size_t x, const std::size_t y, const std::size_t z,
-                        const std::size_t width, const std::size_t height) noexcept
-        : x(x), y(y), z(z), width(width), height(height)
+    struct pack_rect
     {
+      std::size_t x = 0;
+      std::size_t y = 0;
+      std::size_t z = 0;
+      std::size_t width = 0;
+      std::size_t height = 0;
+
+      constexpr pack_rect() noexcept = default;
+
+      constexpr pack_rect(const std::size_t x, const std::size_t y, const std::size_t z,
+                          const std::size_t width, const std::size_t height) noexcept
+          : x(x), y(y), z(z), width(width), height(height)
+      {
+      }
+
+    constexpr std::size_t
+    MaxDimension() const noexcept
+    {
+      return std::max(width, height);
     }
 
-  constexpr std::size_t
-  MaxDimension() const noexcept
-  {
-    return std::max(width, height);
-  }
+    constexpr std::size_t FarX() const noexcept { return this->x + this->width; }
 
-  constexpr std::size_t FarX() const noexcept { return this->x + this->width; }
-
-  constexpr std::size_t FarY() const noexcept { return this->y + this->height; }
+    constexpr std::size_t FarY() const noexcept { return this->y + this->height; }
 
     constexpr std::strong_ordering operator<=>(const mpbp::pack_rect& other) const noexcept
     {
