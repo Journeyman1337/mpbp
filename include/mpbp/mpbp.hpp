@@ -21,8 +21,8 @@
 #ifndef MPBP_HPP
 #define MPBP_HPP
 
-#include <mpbp/input_rect.hpp>
 #include <mpbp/Packer.hpp>
+#include <mpbp/input_rect.hpp>
 #include <mpbp/pack_rect.hpp>
 
 #endif
