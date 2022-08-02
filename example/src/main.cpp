@@ -28,36 +28,46 @@ int main()
         mpbp::input_rect(0, 1, 1),
         mpbp::input_rect(1, 2, 2),
         mpbp::input_rect(2, 4, 4),
-        mpbp::input_rect(3, 5, 7),
-        mpbp::input_rect(4, 9, 10),
-        mpbp::input_rect(5, 1, 1)
+        mpbp::input_rect(3, 5, 5),
+        mpbp::input_rect(4, 7, 7),
+        mpbp::input_rect(5, 7, 7),
+        mpbp::input_rect(6, 6, 6),
+        mpbp::input_rect(7, 9, 9),
+        mpbp::input_rect(8, 6, 6),
+        mpbp::input_rect(9, 9, 9)
     };
 
     mpbp::Packer packer;
     packer.SetSize(32, 16);
     packer.Pack(input_rects);
 
-    for (int y = 0; y < 16; y ++)
+    for (int page = 0; page < packer.GetPageCount(); page++)
     {
-        for (int x = 0; x < 32; x++)
+        std::cout << "page " << page << std::endl;
+        for (int y = 0; y < 16; y ++)
         {
-            bool rect_found = false;
-            for (const auto& rect : input_rects)
+            for (int x = 0; x < 32; x++)
             {
-                if (rect.x <= x && rect.y <= y && rect.far_x() >= x && rect.far_y() >= y)
+                bool rect_found = false;
+                for (const auto& rect : input_rects)
                 {
-                    std::cout << rect.identifier;
-                    rect_found = true;
-                    break;
+                    if (rect.z == page && rect.x <= x && rect.y <= y && rect.far_x() >= x && rect.far_y() >= y)
+                    {
+                        std::cout << rect.identifier;
+                        rect_found = true;
+                        break;
+                    }
+                }
+                if (!rect_found)
+                {
+                    std::cout << ".";
                 }
             }
-            if (!rect_found)
-            {
-                std::cout << ".";
-            }
+            std::cout << std::endl;
         }
-        std::cout << std::endl;
+        std::cout << std::endl << std::endl;
     }
+
 
 
     return 0;
