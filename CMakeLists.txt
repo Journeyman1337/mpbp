@@ -6,6 +6,8 @@ PROJECT(mpbp
     LANGUAGES CXX
 )
 
+set(MPBP_CXX_STANDARD 20)
+
 option(MPBP_BUILD_EXAMPLE "Build the example project" OFF)
 option(MPBP_BUILD_TESTS "Build the automatic test framework" OFF)
 
@@ -45,6 +47,12 @@ target_include_directories(${PROJECT_NAME}
 target_precompile_headers(${PROJECT_NAME}
     PUBLIC
     	${MPBP_INCLUDE_FILES}
+)
+
+set_target_properties(${PROJECT_NAME}
+    PROPERTIES
+    CXX_STANDARD ${MPBP_CXX_STANDARD}
+    CXX_STANDARD_REQUIRED TRUE
 )
 
 if (MPBP_BUILD_TESTS)
