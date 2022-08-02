@@ -21,32 +21,32 @@
 #ifndef MPBP_INPUT_RECT_HPP
 #define MPBP_INPUT_RECT_HPP
 
-#include <mpbp/pack_rect.hpp>
 #include <cstddef>
+#include <mpbp/pack_rect.hpp>
 
 namespace mpbp
 {
-	struct input_rect : public mpbp::pack_rect
-	{
-		std::size_t identifier = 0;
+  struct input_rect : public mpbp::pack_rect
+  {
+    std::size_t identifier = 0;
 
-		using mpbp::pack_rect::pack_rect;
+    using mpbp::pack_rect::pack_rect;
 
-		constexpr input_rect() noexcept = default;
+    constexpr input_rect() noexcept = default;
 
-		constexpr input_rect(const std::size_t identifier, const std::size_t width,
-				    const std::size_t height) noexcept
-		: identifier(identifier), mpbp::pack_rect(0, 0, 0, width, height)
-		{
-		}
+    constexpr input_rect(const std::size_t identifier, const std::size_t width,
+                         const std::size_t height) noexcept
+        : identifier(identifier), mpbp::pack_rect(0, 0, 0, width, height)
+    {
+    }
 
-		constexpr void Place(const std::size_t x, const std::size_t y, const std::size_t z) noexcept
-		{
-			this->x = x;
-			this->y = y;
-			this->z = z;
-		}
-	};
-}
+    constexpr void Place(const std::size_t x, const std::size_t y, const std::size_t z) noexcept
+    {
+      this->x = x;
+      this->y = y;
+      this->z = z;
+    }
+  };
+}  // namespace mpbp
 
 #endif

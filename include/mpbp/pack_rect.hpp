@@ -19,44 +19,48 @@
 */
 
 #ifndef MPBP_PACK_RECT_HPP
-#define MPBP_PACK_RECT_HPP
+#  define MPBP_PACK_RECT_HPP
 
-#include <cstddef>
-#include <compare>
+#  include <compare>
+#  include <cstddef>
 
 namespace mpbp
 {
-	struct pack_rect
-	{
-		std::size_t x = 0;
-		std::size_t y = 0;
-		std::size_t z = 0;
-		std::size_t width = 0;
-		std::size_t height = 0;
+  struct pack_rect
+  {
+    std::size_t x = 0;
+    std::size_t y = 0;
+    std::size_t z = 0;
+    std::size_t width = 0;
+    std::size_t height = 0;
 
-		constexpr pack_rect() noexcept = default;
+    constexpr pack_rect() noexcept = default;
 
-		constexpr pack_rect(const std::size_t x, const std::size_t y, const std::size_t z,
-			       const std::size_t width, const std::size_t height) noexcept
-		: x(x), y(y), z(z), width(width), height(height)
-		{
-		}
-		}
-		
-		constexpr std::size_t MaxDimension() const noexcept { return std::max(width, height); }
+    constexpr pack_rect(const std::size_t x, const std::size_t y, const std::size_t z,
+                        const std::size_t width, const std::size_t height) noexcept
+        : x(x), y(y), z(z), width(width), height(height)
+    {
+    }
+  }
 
-	    	constexpr std::size_t FarX() const noexcept { return this->x + this->width; }
+  constexpr std::size_t
+  MaxDimension() const noexcept
+  {
+    return std::max(width, height);
+  }
 
-		constexpr std::size_t FarY() const noexcept { return this->y + this->height; }
+  constexpr std::size_t FarX() const noexcept { return this->x + this->width; }
 
-		constexpr std::strong_ordering operator<=>(const prpg::PackRect& other) const noexcept
-		{
-			return this->MaxDimension() <=> other.MaxDimension();
-		}
+  constexpr std::size_t FarY() const noexcept { return this->y + this->height; }
 
-		constexpr bool Fits(const prpg::PackRect& other) const noexcept
-		{
-			return (this->width >= other.width) && (this->height >= other.height);
-		}
-	};
+  constexpr std::strong_ordering operator<=>(const prpg::PackRect& other) const noexcept
+  {
+    return this->MaxDimension() <=> other.MaxDimension();
+  }
+
+  constexpr bool Fits(const prpg::PackRect& other) const noexcept
+  {
+    return (this->width >= other.width) && (this->height >= other.height);
+  }
+};
 }

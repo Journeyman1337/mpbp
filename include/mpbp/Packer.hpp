@@ -21,44 +21,44 @@
 #ifndef MPBP_PACKER_HPP
 #define MPBP_PACKER_HPP
 
-#include <mpbp/pack_rect.hpp>
 #include <mpbp/input_rect.hpp>
-#include <vector>
+#include <mpbp/pack_rect.hpp>
 #include <span>
+#include <vector>
 
 namespace mpbp
 {
-	class Packer
-	{
-	private:
-		std::vector<mpbp::pack_rect> spaces = std::vector<mpbp::pack_rect>();
-		std::size_t page_count = 0;
-		std::size_t width = 0;
-		std::size_t height = 0;
-		std::size_t max_width = 0;
-		std::size_t max_height = 0;
-		std::size_t top_page_width = 0;
-		std::size_t top_page_height = 0;
-		
-	public:
-		constexpr RectPacker() noexcept = default;
-		constexpr RectPacker(std::size_t max_width, std::size_t max_height) noexcept 
-			: max_width(max_width)
-			, max_height(max_height)
-		{}
-		
-		void Clear() noexcept;
-		void Reset(std::size_t max_width, std::size_t max_height);
-		const std::vector<mpbp::pack_rect>& GetSpaces() const noexcept;
-		std::size_t GetPageCount() const noexcept;
-		std::size_t GetWidth() const noexcept;
-		std::size_t GetHeight() const noexcept;
-		std::size_t GetMaxWidth() const noexcept;
-		std::size_t GetMaxHeight() const noexcept;
-		std::size_t GetTopPageWidth() const noexcept;
-		std::size_t GetTopPageHeight() const noexcept;
-		void Pack(const std::span<mpbp::input_rect> input_rects);
-	};
-}
+  class Packer
+  {
+   private:
+    std::vector<mpbp::pack_rect> spaces = std::vector<mpbp::pack_rect>();
+    std::size_t page_count = 0;
+    std::size_t width = 0;
+    std::size_t height = 0;
+    std::size_t max_width = 0;
+    std::size_t max_height = 0;
+    std::size_t top_page_width = 0;
+    std::size_t top_page_height = 0;
+
+   public:
+    constexpr RectPacker() noexcept = default;
+    constexpr RectPacker(std::size_t max_width, std::size_t max_height) noexcept
+        : max_width(max_width), max_height(max_height)
+    {
+    }
+
+    void Clear() noexcept;
+    void Reset(std::size_t max_width, std::size_t max_height);
+    const std::vector<mpbp::pack_rect>& GetSpaces() const noexcept;
+    std::size_t GetPageCount() const noexcept;
+    std::size_t GetWidth() const noexcept;
+    std::size_t GetHeight() const noexcept;
+    std::size_t GetMaxWidth() const noexcept;
+    std::size_t GetMaxHeight() const noexcept;
+    std::size_t GetTopPageWidth() const noexcept;
+    std::size_t GetTopPageHeight() const noexcept;
+    void Pack(const std::span<mpbp::input_rect> input_rects);
+  };
+}  // namespace mpbp
 
 #endif
