@@ -42,7 +42,6 @@ namespace mpbp
         : x(x), y(y), z(z), width(width), height(height)
     {
     }
-  }
 
   constexpr std::size_t
   MaxDimension() const noexcept
