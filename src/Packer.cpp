@@ -274,8 +274,9 @@ PACK_LOOP_START:  // goto is normally frowned upon, except sometimes in situatio
       }
     }
     /*
-        If there are no other placement options available, the only think left that can be done is
-       to add a new page and place the rect on the top right corner.
+        If there are no other placement options available, the only thing left that can be done is
+       to add a new page and place the rect on the top left corner. First though, any remaining
+       space on the current page should be stored in the spaces vector.
      */
     // If there is remaining space to the right...
     if (this->top_bin_width < this->max_page_width)
@@ -296,8 +297,9 @@ PACK_LOOP_START:  // goto is normally frowned upon, except sometimes in situatio
     this->page_count++;
     // Place the rect at the top left corner of the new page.
     cur_rect->place(0, 0, top_page_i());
+    // Make the top page bin dimensions match the rect.
     this->top_bin_width = cur_rect->width;
-    this->top_bin_height = cur_rect->height;
+    // Restart the input rect placement loop to place the next input rect.
     goto PACK_LOOP_START;
   }
 }
