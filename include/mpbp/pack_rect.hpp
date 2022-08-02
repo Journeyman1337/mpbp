@@ -44,10 +44,11 @@ namespace mpbp
     }
 
     constexpr std::size_t area() const noexcept { return this->width * this->height; }
+    
+    constexpr std::size_t far_x() const noexcept { return this->x + this->width - 1; }
 
-    constexpr std::size_t FarX() const noexcept { return this->x + this->width; }
+    constexpr std::size_t far_y() const noexcept { return this->y + this->height - 1; }
 
-    constexpr std::size_t FarY() const noexcept { return this->y + this->height; }
 
     constexpr std::strong_ordering operator<=>(const mpbp::pack_rect& other) const noexcept
     {
