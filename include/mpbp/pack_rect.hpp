@@ -23,6 +23,7 @@
 
 #  include <compare>
 #  include <cstddef>
+#include <cmath>
 
 namespace mpbp
 {
