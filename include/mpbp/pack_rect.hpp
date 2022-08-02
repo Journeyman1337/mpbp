@@ -53,16 +53,16 @@ namespace mpbp
 
   constexpr std::size_t FarY() const noexcept { return this->y + this->height; }
 
-  constexpr std::strong_ordering operator<=>(const prpg::PackRect& other) const noexcept
-  {
-    return this->MaxDimension() <=> other.MaxDimension();
-  }
+    constexpr std::strong_ordering operator<=>(const mpbp::pack_rect& other) const noexcept
+    {
+      return this->MaxDimension() <=> other.MaxDimension();
+    }
 
-  constexpr bool Fits(const prpg::PackRect& other) const noexcept
-  {
-    return (this->width >= other.width) && (this->height >= other.height);
-  }
-};
+    constexpr bool Fits(const mpbp::pack_rect& other) const noexcept
+    {
+      return (this->width >= other.width) && (this->height >= other.height);
+    }
+  };
 }
 
 #endif
