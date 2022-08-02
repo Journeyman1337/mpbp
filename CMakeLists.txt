@@ -36,7 +36,8 @@ source_group("includes"
 )
 
 add_library(${PROJECT_NAME} STATIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/roguelike.h"
+    ${MPBP_SOURCE_FILES}
+    ${MPBP_INCLUDE_FILES}
 )
 
 target_include_directories(${PROJECT_NAME}
