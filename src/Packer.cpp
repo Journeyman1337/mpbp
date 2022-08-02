@@ -20,7 +20,6 @@
 
 #include <algorithm>
 #include <mpbp/Packer.hpp>
-#include <mpbp/configuration.hpp>
 #include <mpbp/input_rect.hpp>
 #include <mpbp/pack_rect.hpp>
 #include <stdexcept>
