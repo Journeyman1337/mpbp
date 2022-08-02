@@ -1,6 +1,6 @@
 Language: Cpp
 BasedOnStyle: Google
-IndentPPDirectives: AfterHash
+IndentPPDirectives: None
 BreakConstructorInitializers: BeforeComma
 IndentCaseLabels: false
 AlwaysBreakTemplateDeclarations: false
