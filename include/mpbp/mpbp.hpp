@@ -17,3 +17,12 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 */
+
+#ifndef MPBP_HPP
+#define MPBP_HPP
+
+#include <mpbp/input_rect.hpp>
+#include <mpbp/Packer.hpp>
+#include <mpbp/pack_rect.hpp>
+
+#endif
