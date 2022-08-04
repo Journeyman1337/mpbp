@@ -6,10 +6,15 @@ PROJECT(mpbp
     LANGUAGES CXX
 )
 
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
 set(MPBP_CXX_STANDARD 20)
 
-option(MPBP_BUILD_EXAMPLE "Build the example project" OFF)
-option(MPBP_BUILD_TESTS "Build the automatic test framework" OFF)
+option(MPBP_BUILD_EXAMPLE "Build the mpbp example project" OFF)
+option(MPBP_BUILD_TESTS "Build the mpbp automatic test framework" OFF)
+option(MPBP_INSTALL "Generate the mpbp installation target." ON)
+
+set(MPBP_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/")
 
 set(MPBP_SOURCE_FILES
     "Packer.cpp"
@@ -40,9 +45,12 @@ add_library(${PROJECT_NAME} STATIC
     ${MPBP_INCLUDE_FILES}
 )
 
+add_library(mpbp::mpbp ALIAS ${PROJECT_NAME})
+
 target_include_directories(${PROJECT_NAME}
     PUBLIC
-        "${CMAKE_CURRENT_SOURCE_DIR}/include/"
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+        "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
 )
 
 target_precompile_headers(${PROJECT_NAME}
@@ -52,6 +60,7 @@ target_precompile_headers(${PROJECT_NAME}
 
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
+    OUTPUT_NAME "mpbp"
     CXX_STANDARD ${MPBP_CXX_STANDARD}
     CXX_STANDARD_REQUIRED TRUE
 )
@@ -62,4 +71,25 @@ endif()
 
 if (MPBP_BUILD_EXAMPLE)
     add_subdirectory(example)
+endif()
+
+if (MPBP_INSTALL)
+	include(GNUInstallDirs)
+    set(MPBP_EXPORT_NAME "mpbpConfig")
+	set(MPBP_INSTALL_CONFIGDIR "${CMAKE_INSTALL_LIBDIR}/cmake/mpbp")
+	install(TARGETS ${PROJECT_NAME}
+        EXPORT ${MPBP_EXPORT_NAME}
+		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+	)
+    export(TARGETS ${PROJECT_NAME}
+        NAMESPACE mpbp::
+        FILE "${CMAKE_CURRENT_BINARY_DIR}/CMake/${MPBP_EXPORT_NAME}.cmake"
+    )
+	install(EXPORT mpbpConfig
+		FILE "mpbp.cmake"
+		NAMESPACE mpbp::
+		DESTINATION "${CMAKE_INSTALL_DATADIR}/mpbp/cmake"
+	)    
 endif()
