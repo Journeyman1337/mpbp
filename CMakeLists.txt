@@ -34,7 +34,7 @@ set(MPBP_INCLUDE_FILES
     "mpbp.hpp"
     "Packer.hpp"
     "pack_rect.hpp"
-    "version.h"
+    "configuration.h"
 )
 list(
     TRANSFORM MPBP_INCLUDE_FILES
