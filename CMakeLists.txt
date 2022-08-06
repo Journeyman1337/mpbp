@@ -17,7 +17,7 @@ option(MPBP_INSTALL "Generate the mpbp installation target." ON)
 set(MPBP_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 set(MPBP_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/")
 
-configure_file("${MPBP_SOURCE_DIR}/version.h.in" "${MPBP_INCLUDE_DIR}/mpbp/version.h")
+configure_file("${MPBP_SOURCE_DIR}/configuration.h.in" "${MPBP_INCLUDE_DIR}/mpbp/configuration.h")
 
 set(MPBP_SOURCE_FILES
     "Packer.cpp"
