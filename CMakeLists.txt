@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.19)
 
 PROJECT(mpbp
-    VERSION 0.0.1
+    VERSION 0.0.0
     DESCRIPTION "A multi-page bin packing library."
     LANGUAGES CXX
 )
