@@ -38,7 +38,7 @@ set(MPBP_INCLUDE_FILES
 )
 list(
     TRANSFORM MPBP_INCLUDE_FILES
-    PREPEND "${CMAKE_CURRENT_SOURCE_DIR}/include/mpbp/"
+    PREPEND "${MPBP_INCLUDE_DIR}/mpbp/"
 )
 source_group("includes"
     FILES ${MPBP_INCLUDE_FILES}
