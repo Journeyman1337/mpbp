@@ -54,7 +54,6 @@ add_library(mpbp::mpbp ALIAS ${PROJECT_NAME})
 target_include_directories(${PROJECT_NAME}
     PUBLIC
         "$<BUILD_INTERFACE:${MPBP_INCLUDE_DIR}>"
-        "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
 )
 
 target_precompile_headers(${PROJECT_NAME}
@@ -78,7 +77,11 @@ if (MPBP_BUILD_EXAMPLE)
 endif()
 
 if (MPBP_INSTALL)
-    	include(GNUInstallDirs)
+	include(GNUInstallDirs)
+	target_include_directories(${PROJECT_NAME}
+		PUBLIC
+			"$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+	)
 	install(TARGETS ${PROJECT_NAME}
        		EXPORT ${PROJECT_NAME}
 		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
