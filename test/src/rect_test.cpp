@@ -147,7 +147,7 @@ SCENARIO("A Rect is compared with another Rect")
 {
     GIVEN("A Rect named rect_a with a width of 5 and a height of 10")
     {
-        auto rect_a = createRect(0, 0, 0, 0, 5, 5);
+        auto rect_a = createRect(0, 0, 0, 0, 5, 10);
 
         GIVEN("A Rect named rect_b with a width of 10 and a height of 20")
         {
