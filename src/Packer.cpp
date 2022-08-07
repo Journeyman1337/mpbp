@@ -109,29 +109,29 @@ void mpbp::Packer::Pack(const std::span<mpbp::input_rect> input_rects)
 /*
     Now, it is time to start placing...
 */
+/*
+    The first rect is always placed the same way.
+*/
+// If no rects have been placed yet (including in any previous packs in case this is offline)...
+if (this->page_count == 0)
+{
+  // Start creating the first page.
+  this->page_count = 1;
+  // Place the current rect at the top left corner of the first page.
+  cur_rect->place(0, 0, 0);
+  this->width = cur_rect->width;
+  this->height = cur_rect->height;
+  // Expand the top page to match the size of the current rect.
+  this->top_bin_width = cur_rect->width;
+  this->top_bin_height = cur_rect->height;
+  // Decrement to the next smallest rect.
+  next_rect();
+}
 // Create goto label to easily iterate to the next rect in the loop.
 PACK_LOOP_START:  // goto is normally frowned upon, except sometimes in situations like these...
   // Loop through all remaining input rects, largest to smallest.
   while (cur_rect_i != 0)
   {
-    /*
-        The first rect is always placed the same way.
-    */
-    // If no rects have been placed yet...
-    if (this->page_count == 0)
-    {
-      // Start creating the first page.
-      this->page_count = 1;
-      // Place the current rect at the top left corner of the first page.
-      cur_rect->place(0, 0, 0);
-      this->width = cur_rect->width;
-      this->height = cur_rect->height;
-      // Expand the top page to match the size of the current rect.
-      this->top_bin_width = cur_rect->width;
-      this->top_bin_height = cur_rect->height;
-      // Restart the input rect placement loop to place the next input rect.
-      goto PACK_LOOP_START;
-    }
     // Decrement to the next smallest rect.
     next_rect();
     /*
