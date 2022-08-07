@@ -1,1 +1,1 @@
-find_package(doctest REQUIRED)
+find_package(Catch2 CONFIG REQUIRED)
