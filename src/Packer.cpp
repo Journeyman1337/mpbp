@@ -36,7 +36,7 @@ void mpbp::Packer::Clear() noexcept
   this->top_bin_height = 0;
 }
 
-void mpbp::Packer::SetSize(std::size_t max_width, std::size_t max_height)
+void mpbp::Packer::SetMaxPageSize(std::size_t max_width, std::size_t max_height)
 {
   this->Clear();
   this->max_width = max_width;
