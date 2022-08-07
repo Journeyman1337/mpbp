@@ -21,6 +21,8 @@ configure_file("${MPBP_SOURCE_DIR}/configuration.h.in" "${MPBP_INCLUDE_DIR}/mpbp
 
 set(MPBP_SOURCE_FILES
     "Packer.cpp"
+    "Rect.cpp"
+    "Space.cpp"
 )
 list(
     TRANSFORM MPBP_SOURCE_FILES
@@ -30,15 +32,15 @@ source_group("sources"
     FILES ${MPBP_SOURCE_FILES}
 )
 set(MPBP_INCLUDE_FILES
-    "input_rect.hpp"
+    "configuration.h"
     "mpbp.hpp"
     "Packer.hpp"
-    "pack_rect.hpp"
-    "configuration.h"
+    "Rect.hpp"
+    "Space.hpp"
 )
 list(
     TRANSFORM MPBP_INCLUDE_FILES
-    PREPEND "${MPBP_INCLUDE_DIR}/mpbp/"
+    PREPEND "${MPBP_INCLUDE_DIR}mpbp/"
 )
 source_group("includes"
     FILES ${MPBP_INCLUDE_FILES}

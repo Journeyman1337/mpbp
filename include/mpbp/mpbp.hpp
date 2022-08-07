@@ -22,7 +22,7 @@
 #define MPBP_HPP
 
 #include <mpbp/Packer.hpp>
-#include <mpbp/input_rect.hpp>
-#include <mpbp/pack_rect.hpp>
+#include <mpbp/Rect.hpp>
+#include <mpbp/Space.hpp>
 
 #endif

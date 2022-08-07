@@ -27,39 +27,32 @@
 
 namespace mpbp
 {
-  struct pack_rect
+  class Rect
   {
-    std::size_t x = 0;
-    std::size_t y = 0;
-    std::size_t z = 0;
-    std::size_t width = 0;
-    std::size_t height = 0;
+    private:
+      std::size_t identifier = 0;
+      int x = -1;
+      int y = -1;
+      int z = -1;
+      int width = 0;
+      int height = 0;
 
-    constexpr pack_rect() noexcept = default;
+    public:
+      constexpr Rect() noexcept = default;
+      Rect(std::size_t identifier, int width, int height) noexcept;
 
-    constexpr pack_rect(const std::size_t x, const std::size_t y, const std::size_t z,
-                        const std::size_t width, const std::size_t height) noexcept
-        : x(x), y(y), z(z), width(width), height(height)
-    {
-    }
-
-    constexpr std::size_t max_dimension() const noexcept { return std::max(this->width, this->height); }
-    
-    constexpr std::size_t far_x() const noexcept { return this->x + this->width - 1; }
-
-    constexpr std::size_t far_y() const noexcept { return this->y + this->height - 1; }
-
-    constexpr bool is_degenerate() const noexcept { return this->width == 0 || this->height == 0; }
-
-    constexpr std::strong_ordering operator<=>(const mpbp::pack_rect& other) const noexcept
-    {
-      return this->max_dimension() <=> other.max_dimension();
-    }
-
-    constexpr bool fits(const mpbp::pack_rect& other) const noexcept
-    {
-      return (this->width >= other.width) && (this->height >= other.height);
-    }
+      void Place(int x, int y, int z) noexcept;
+      int GetX() const noexcept;
+      int GetY() const noexcept;
+      int GetZ() const noexcept;
+      int GetFarX() const noexcept;
+      int GetFarY() const noexcept;
+      int GetWidth() const noexcept;
+      int GetHeight() const noexcept;
+      std::size_t GetIdentifier() const noexcept;
+      int GetMaxDimension() const noexcept;
+      bool GetIsDegenerate() const noexcept;
+      std::strong_ordering operator<=>(const mpbp::Rect& other) const noexcept;
   };
 }  // namespace mpbp
 

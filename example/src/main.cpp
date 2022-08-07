@@ -23,18 +23,18 @@
 
 int main()
 {
-    std::vector<mpbp::input_rect> input_rects = 
+    std::vector<mpbp::Rect> input_rects = 
     {
-        mpbp::input_rect(0, 1, 1),
-        mpbp::input_rect(1, 2, 2),
-        mpbp::input_rect(2, 4, 4),
-        mpbp::input_rect(3, 5, 5),
-        mpbp::input_rect(4, 7, 7),
-        mpbp::input_rect(5, 7, 7),
-        mpbp::input_rect(6, 6, 6),
-        mpbp::input_rect(7, 9, 9),
-        mpbp::input_rect(8, 6, 6),
-        mpbp::input_rect(9, 30, 15)
+        mpbp::Rect(0, 1, 1),
+        mpbp::Rect(1, 2, 2),
+        mpbp::Rect(2, 4, 4),
+        mpbp::Rect(3, 5, 5),
+        mpbp::Rect(4, 7, 7),
+        mpbp::Rect(5, 7, 7),
+        mpbp::Rect(6, 6, 6),
+        mpbp::Rect(7, 9, 9),
+        mpbp::Rect(8, 6, 6),
+        mpbp::Rect(9, 30, 15)
     };
 
     mpbp::Packer packer;
@@ -51,9 +51,9 @@ int main()
                 bool rect_found = false;
                 for (const auto& rect : input_rects)
                 {
-                    if (rect.z == page && rect.x <= x && rect.y <= y && rect.far_x() >= x && rect.far_y() >= y)
+                    if (rect.GetZ() == page && rect.GetX() <= x && rect.GetY() <= y && rect.GetFarX() >= x && rect.GetFarY() >= y)
                     {
-                        std::cout << rect.identifier;
+                        std::cout << rect.GetIdentifier();
                         rect_found = true;
                         break;
                     }
