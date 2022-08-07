@@ -28,8 +28,7 @@ int main()
       mpbp::Rect(4, 7, 7), mpbp::Rect(5, 7, 7),  mpbp::Rect(6, 6, 6), mpbp::Rect(7, 9, 9),
       mpbp::Rect(8, 6, 6), mpbp::Rect(9, 30, 15)};
 
-  mpbp::Packer packer;
-  packer.SetSize(32, 16);
+  mpbp::Packer packer(32, 16);
   packer.Pack(input_rects);
 
   for (int page = 0; page < packer.GetPageCount(); page++)
