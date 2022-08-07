@@ -24,7 +24,7 @@
 
 SCENARIO("Properties are retrieved from a Space")
 {
-    GIVEN("A space at (5, 10, 15) with a width of 20 and a height of 25")
+    GIVEN("A Space at (5, 10, 15) with a width of 20 and a height of 25")
     {
         mpbp::Space space(5, 10, 15, 20, 25);
 
@@ -115,11 +115,11 @@ SCENARIO("Space max dimension is determined")
 
 SCENARIO("Space is checked to see if it fits a Rect")
 {
-    GIVEN("A space with a width of 5 and a height of 10")
+    GIVEN("A Space with a width of 5 and a height of 10")
     {
         mpbp::Space space(0, 0, 0, 5, 10);
 
-        GIVEN("A rect with a width of 1 and a height of 2")
+        GIVEN("A Rect with a width of 1 and a height of 2")
         {
             mpbp::Rect rect(0, 1, 2);
 
