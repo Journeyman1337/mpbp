@@ -52,7 +52,7 @@ namespace mpbp
     Packer(std::size_t max_width, std::size_t max_height) noexcept;
 
     void Clear() noexcept;
-    void SetSize(std::size_t max_width, std::size_t max_height);
+    void SetMaxPageSize(std::size_t max_width, std::size_t max_height);
     const std::vector<mpbp::Space>& GetSpaces() const noexcept;
     std::size_t GetPageCount() const noexcept;
     std::size_t GetWidth() const noexcept;
