@@ -236,13 +236,13 @@ void mpbp::Packer::Pack(const std::span<mpbp::Rect> rects)
   }
   this->reserveSpaces(rects);
   auto top_page_i = [&]() -> std::size_t { return this->page_count - 1; };
-  auto next_rect = [&]() { rect = &rects[rect_i++]; };
+  auto next_rect = [&]() { rect = &rects[++rect_i]; };
   if (this->page_count == 0)
   {
     this->placeNewPage(*rect);
     next_rect();
   }
-  for (; rect_i <= rects.size(); next_rect())
+  for (; rect_i < rects.size(); next_rect())
   {
     if (this->tryPlaceSpace(*rect)) continue;
     if (this->tryPlaceExpandBin(*rect)) continue;
