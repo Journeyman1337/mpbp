@@ -94,7 +94,7 @@ jobs:
           report_paths: "**/unittests.*.xml"
           require_tests: true
           fail_on_failure: true
-      - uses: actions/upload/artifact@v2
+      - uses: actions/upload-artifact@v2
         if: ${{ failure() }}
         with:
           name: vcpkg-logs
