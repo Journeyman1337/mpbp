@@ -89,7 +89,7 @@ jobs:
         continue-on-error: true
       - name: run the tests
         shell: bash
-        working-directory: ${{ github.workspace }}/build/test/auto/
+        working-directory: ${{ github.workspace }}/build/test/
         run: ctest -C ${{ matrix.build_type }}
         continue-on-error: true
       - name: JUnit report
