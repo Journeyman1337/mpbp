@@ -3,6 +3,7 @@ find_package(Catch2 CONFIG REQUIRED)
 set(MPBP_TEST_SOURCES
     "space_test.cpp"
     "rect_test.cpp"
+    "packer_test.cpp"
 )
 list(
     TRANSFORM MPBP_TEST_SOURCES
