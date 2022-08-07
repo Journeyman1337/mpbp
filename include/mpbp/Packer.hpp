@@ -49,6 +49,7 @@ namespace mpbp
 
    public:
     constexpr Packer() noexcept = default;
+    Packer(std::size_t max_width, std::size_t max_height) noexcept;
 
     void Clear() noexcept;
     void SetSize(std::size_t max_width, std::size_t max_height);

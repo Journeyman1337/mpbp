@@ -22,6 +22,10 @@
 #include <mpbp/Packer.hpp>
 #include <stdexcept>
 
+mpbp::Packer::Packer(std::size_t max_width, std::size_t max_height) noexcept
+  : max_width(max_width), max_height(max_height)
+{}
+
 void mpbp::Packer::Clear() noexcept
 {
   this->spaces.clear();
