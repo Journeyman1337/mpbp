@@ -52,7 +52,7 @@ SCENARIO("Packer is used to bin pack")
     {
         mpbp::Packer packer(512, 512);
 
-        GIVEN("A vector of Rect")
+        GIVEN("A packable vector of Rect")
         {
             std::vector<mpbp::Rect> rects = 
             {
@@ -86,7 +86,7 @@ SCENARIO("Packer is used to bin pack")
                 mpbp::Rect(0, 1, 512)
             };
 
-            WHEN("A vector of Rect is packed")
+            WHEN("The vector of Rect is packed with the Packer")
             {
                 packer.Pack(rects);
 
