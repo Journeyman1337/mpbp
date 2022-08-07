@@ -3,7 +3,7 @@
 #include <mpbp/Space.hpp>
 
 mpbp::Space::Space(int x, int y, int z, int width, int height) noexcept
-    : x(x), y(y), z(z), width(width), height(height), max_dimension(std::max(x, y))
+    : x(x), y(y), z(z), width(width), height(height), max_dimension(std::max(width, height))
 {
 }
 
