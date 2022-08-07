@@ -21,8 +21,8 @@
 #ifndef MPBP_PACKER_HPP
 #define MPBP_PACKER_HPP
 
-#include <mpbp/Space.hpp>
 #include <mpbp/Rect.hpp>
+#include <mpbp/Space.hpp>
 #include <span>
 #include <vector>
 
@@ -46,6 +46,7 @@ namespace mpbp
     void spaceLeftoverPage();
     void placeNewPage(mpbp::Rect& rect);
     std::size_t getTopPageI() const noexcept;
+
    public:
     constexpr Packer() noexcept = default;
 
