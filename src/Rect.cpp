@@ -61,7 +61,7 @@ int mpbp::Rect::GetMaxDimension() const noexcept
 
 bool mpbp::Rect::GetIsDegenerate() const noexcept
 {
-    return this->width < 0 || this->height < 0;
+    return this->width <= 0 || this->height <= 0;
 }
 
 std::strong_ordering mpbp::Rect::operator<=>(const mpbp::Rect& other) const noexcept
