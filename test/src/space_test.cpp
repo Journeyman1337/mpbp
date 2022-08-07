@@ -19,26 +19,26 @@
 */
 
 #include <catch2/catch_all.hpp>
-#include <mpbp/Space.hpp>
 #include <mpbp/Rect.hpp>
+#include <mpbp/Space.hpp>
 
 SCENARIO("Properties are retrieved from a Space")
 {
-    GIVEN("A Space at (5, 10, 15) with a width of 20 and a height of 25")
-    {
-        mpbp::Space space(5, 10, 15, 20, 25);
+  GIVEN("A Space at (5, 10, 15) with a width of 20 and a height of 25")
+  {
+    mpbp::Space space(5, 10, 15, 20, 25);
 
-        THEN("The getters return the correct values")
-        {
-            REQUIRE(!space.GetIsDegenerate());
-            CHECK(space.GetX() == 5);
-            CHECK(space.GetY() == 10);
-            CHECK(space.GetZ() == 15);
-            CHECK(space.GetWidth() == 20);
-            CHECK(space.GetHeight() == 25);
-            CHECK(space.GetMaxDimension() == 25);
-        }
+    THEN("The getters return the correct values")
+    {
+      REQUIRE(!space.GetIsDegenerate());
+      CHECK(space.GetX() == 5);
+      CHECK(space.GetY() == 10);
+      CHECK(space.GetZ() == 15);
+      CHECK(space.GetWidth() == 20);
+      CHECK(space.GetHeight() == 25);
+      CHECK(space.GetMaxDimension() == 25);
     }
+  }
 }
 
 SCENARIO("Space degeneracy is determined")
@@ -115,48 +115,36 @@ SCENARIO("Space max dimension is determined")
 
 SCENARIO("Space is checked to see if it fits a Rect")
 {
-    GIVEN("A Space with a width of 5 and a height of 10")
+  GIVEN("A Space with a width of 5 and a height of 10")
+  {
+    mpbp::Space space(0, 0, 0, 5, 10);
+
+    GIVEN("A Rect with a width of 1 and a height of 2")
     {
-        mpbp::Space space(0, 0, 0, 5, 10);
+      mpbp::Rect rect(0, 1, 2);
 
-        GIVEN("A Rect with a width of 1 and a height of 2")
-        {
-            mpbp::Rect rect(0, 1, 2);
-
-            THEN("The Rect fits in the Space")
-            {
-                CHECK(space.Fits(rect));
-            }
-        }
-
-        GIVEN("A Rect with a width of 5 and a height of 10")
-        {
-            mpbp::Rect rect(0, 5, 10);
-
-            THEN("The Rect fits in the Space")
-            {
-                CHECK(space.Fits(rect));
-            }
-        }
-
-        GIVEN("A Rect with a width of 5 and a height of 20")
-        {
-            mpbp::Rect rect(0, 10, 20);
-
-            THEN("The Rect does not fit in the Space")
-            {
-                CHECK(!space.Fits(rect));
-            }
-        }
-
-        GIVEN("A Rect with a width of 20 and a height of 10")
-        {
-            mpbp::Rect rect(0, 20, 10);
-
-            THEN("The Rect does not fit in the Space")
-            {
-                CHECK(!space.Fits(rect));
-            }
-        }
+      THEN("The Rect fits in the Space") { CHECK(space.Fits(rect)); }
     }
+
+    GIVEN("A Rect with a width of 5 and a height of 10")
+    {
+      mpbp::Rect rect(0, 5, 10);
+
+      THEN("The Rect fits in the Space") { CHECK(space.Fits(rect)); }
+    }
+
+    GIVEN("A Rect with a width of 5 and a height of 20")
+    {
+      mpbp::Rect rect(0, 10, 20);
+
+      THEN("The Rect does not fit in the Space") { CHECK(!space.Fits(rect)); }
+    }
+
+    GIVEN("A Rect with a width of 20 and a height of 10")
+    {
+      mpbp::Rect rect(0, 20, 10);
+
+      THEN("The Rect does not fit in the Space") { CHECK(!space.Fits(rect)); }
+    }
+  }
 }
