@@ -70,6 +70,7 @@ jobs:
             ${{ runner.os }}-vcpkg-downloads-
       - name: bootstrap vcpkg
         shell: bash
+        working-directory: ${{ github.workspace }}/vcpkg/
         run: ./bootstrap-vcpkg.sh -disableMetrics
       - name: install vcpkg packages
         shell: bash
