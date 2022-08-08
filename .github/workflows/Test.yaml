@@ -31,8 +31,8 @@ jobs:
           - {
               Name: MacOS Clang,
               os: macos-latest,
-              cc: clang-12,
-              cxx: clang++-12,
+              cc: clang,
+              cxx: clang++,
               arch: "x64-osx",
             }
         build_type: [Release, Debug]
