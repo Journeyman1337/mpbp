@@ -32,35 +32,35 @@ namespace mpbp
   {
    private:
     std::vector<mpbp::Space> spaces = std::vector<mpbp::Space>();
-    std::size_t page_count = 0;
-    std::size_t width = 0;
-    std::size_t height = 0;
-    std::size_t max_width = 0;
-    std::size_t max_height = 0;
-    std::size_t top_bin_width = 0;
-    std::size_t top_bin_height = 0;
+    int page_count = 0;
+    int width = 0;
+    int height = 0;
+    int max_width = 0;
+    int max_height = 0;
+    int top_bin_width = 0;
+    int top_bin_height = 0;
 
     void reserveSpaces(const std::span<mpbp::Rect>& rects);
     bool tryPlaceSpace(mpbp::Rect& rect);
     bool tryPlaceExpandBin(mpbp::Rect& rect);
     void spaceLeftoverPage();
     void placeNewPage(mpbp::Rect& rect);
-    std::size_t getTopPageI() const noexcept;
+    int getTopPageI() const noexcept;
 
    public:
     constexpr Packer() noexcept = default;
-    Packer(std::size_t max_width, std::size_t max_height) noexcept;
+    Packer(int max_width, int max_height) noexcept;
 
     void Clear() noexcept;
-    void SetMaxPageSize(std::size_t max_width, std::size_t max_height);
+    void SetMaxPageSize(int max_width, int max_height);
     const std::vector<mpbp::Space>& GetSpaces() const noexcept;
-    std::size_t GetPageCount() const noexcept;
-    std::size_t GetWidth() const noexcept;
-    std::size_t GetHeight() const noexcept;
-    std::size_t GetMaxWidth() const noexcept;
-    std::size_t GetMaxHeight() const noexcept;
-    std::size_t GetTopBinWidth() const noexcept;
-    std::size_t GetTopBinHeight() const noexcept;
+    int GetPageCount() const noexcept;
+    int GetWidth() const noexcept;
+    int GetHeight() const noexcept;
+    int GetMaxWidth() const noexcept;
+    int GetMaxHeight() const noexcept;
+    int GetTopBinWidth() const noexcept;
+    int GetTopBinHeight() const noexcept;
     void Pack(const std::span<mpbp::Rect> rects);
   };
 }  // namespace mpbp

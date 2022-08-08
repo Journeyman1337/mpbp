@@ -22,7 +22,7 @@
 #include <mpbp/Packer.hpp>
 #include <stdexcept>
 
-mpbp::Packer::Packer(std::size_t max_width, std::size_t max_height) noexcept
+mpbp::Packer::Packer(int max_width, int max_height) noexcept
     : max_width(max_width), max_height(max_height)
 {
 }
@@ -37,7 +37,7 @@ void mpbp::Packer::Clear() noexcept
   this->top_bin_height = 0;
 }
 
-void mpbp::Packer::SetMaxPageSize(std::size_t max_width, std::size_t max_height)
+void mpbp::Packer::SetMaxPageSize(int max_width, int max_height)
 {
   this->Clear();
   this->max_width = max_width;
@@ -46,19 +46,19 @@ void mpbp::Packer::SetMaxPageSize(std::size_t max_width, std::size_t max_height)
 
 const std::vector<mpbp::Space>& mpbp::Packer::GetSpaces() const noexcept { return this->spaces; }
 
-std::size_t mpbp::Packer::GetPageCount() const noexcept { return this->page_count; }
+int mpbp::Packer::GetPageCount() const noexcept { return this->page_count; }
 
-std::size_t mpbp::Packer::GetWidth() const noexcept { return this->width; }
+int mpbp::Packer::GetWidth() const noexcept { return this->width; }
 
-std::size_t mpbp::Packer::GetHeight() const noexcept { return this->height; }
+int mpbp::Packer::GetHeight() const noexcept { return this->height; }
 
-std::size_t mpbp::Packer::GetMaxWidth() const noexcept { return this->max_width; }
+int mpbp::Packer::GetMaxWidth() const noexcept { return this->max_width; }
 
-std::size_t mpbp::Packer::GetMaxHeight() const noexcept { return this->max_height; }
+int mpbp::Packer::GetMaxHeight() const noexcept { return this->max_height; }
 
-std::size_t mpbp::Packer::GetTopBinWidth() const noexcept { return this->top_bin_width; }
+int mpbp::Packer::GetTopBinWidth() const noexcept { return this->top_bin_width; }
 
-std::size_t mpbp::Packer::GetTopBinHeight() const noexcept { return this->top_bin_height; }
+int mpbp::Packer::GetTopBinHeight() const noexcept { return this->top_bin_height; }
 
 void mpbp::Packer::reserveSpaces(const std::span<mpbp::Rect>& rects)
 {
@@ -210,7 +210,7 @@ void mpbp::Packer::placeNewPage(mpbp::Rect& rect)
   this->top_bin_height = rect.GetHeight();
 }
 
-std::size_t mpbp::Packer::getTopPageI() const noexcept { return this->page_count - 1; }
+int mpbp::Packer::getTopPageI() const noexcept { return this->page_count - 1; }
 
 void mpbp::Packer::Pack(const std::span<mpbp::Rect> rects)
 {
@@ -234,7 +234,7 @@ void mpbp::Packer::Pack(const std::span<mpbp::Rect> rects)
     throw std::runtime_error("one or more rects do not fit in bin");
   }
   this->reserveSpaces(rects);
-  auto top_page_i = [&]() -> std::size_t { return this->page_count - 1; };
+  auto top_page_i = [&]() -> int { return this->page_count - 1; };
   auto next_rect = [&]() { rect = &rects[++rect_i]; };
   if (this->page_count == 0)
   {
