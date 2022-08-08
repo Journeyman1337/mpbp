@@ -25,11 +25,13 @@
 
 bool noRectIntersect(std::vector<mpbp::Rect>& rects)
 {
-  for (auto& recta : rects)
+  for (std::size_t a_i = 0; a_i < rects.size(); a_i++)
   {
-    for (auto& rectb : rects)
+    auto& recta = rects[a_i];
+    for (std::size_t b_i = 0; b_i < rects.size(); b_i++)
     {
-      if (&recta != &rectb && recta.GetZ() == rectb.GetZ())
+      auto& rectb = rects[b_i];
+      if (a_i != b_i && recta.GetZ() == rectb.GetZ())
       {
         if (recta.GetX() < rectb.GetFarX() && recta.GetFarX() > rectb.GetX() &&
             recta.GetY() < rectb.GetFarY() && recta.GetFarY() > rectb.GetY())
