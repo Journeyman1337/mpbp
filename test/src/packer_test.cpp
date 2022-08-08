@@ -22,6 +22,7 @@
 #include <mpbp/Packer.hpp>
 #include <mpbp/Rect.hpp>
 #include <vector>
+#include <cstddef
 
 bool noRectIntersect(std::vector<mpbp::Rect>& rects)
 {
