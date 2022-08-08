@@ -1,5 +1,5 @@
 name: Tests
-on: [workflow_dispatch]
+on: [push, workflow_dispatch]
 jobs:
   build:
     runs-on: ${{ matrix.platform.os }}
