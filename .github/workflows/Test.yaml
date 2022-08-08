@@ -8,29 +8,29 @@ jobs:
       matrix:
         platform:
           - {
-              Name: Windows VS2019,
-              os: windows-2019,
+              Name: Windows Latest,
+              os: windows-latest,
               cc: cl.exe,
               cxx: cl.exe,
               arch: "x64-windows",
             }
           - {
               Name: Linux GCC,
-              os: ubuntu-20.04,
+              os: ubuntu-latest,
               cc: gcc-10,
               cxx: g++-10,
               arch: "x64-linux",
             }
           - {
               Name: Linux Clang,
-              os: ubuntu-20.04,
+              os: ubuntu-latest,
               cc: clang-12,
               cxx: clang++-12,
               arch: "x64-linux",
             }
           - {
               Name: MacOS Clang,
-              os: macos-10.15,
+              os: macos-latest,
               cc: clang,
               cxx: clang++,
               arch: "x64-osx",
