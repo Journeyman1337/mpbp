@@ -93,7 +93,7 @@ jobs:
         run: ctest -C ${{ matrix.build_type }}
         continue-on-error: true
       - name: JUnit report
-        uses: mikepenz/action-junit-report@v2.4.3
+        uses: mikepenz/action-junit-report@v3.2.0
         with:
           report_paths: "**/unittests.*.xml"
           require_tests: true
