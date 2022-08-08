@@ -10,29 +10,29 @@ jobs:
           - {
               Name: Windows Latest,
               os: windows-latest,
-              cc: cl.exe-latest,
-              cxx: cl.exe-latest,
+              cc: cl.exe,
+              cxx: cl.exe,
               arch: "x64-windows",
             }
           - {
               Name: Linux GCC,
               os: ubuntu-latest,
-              cc: gcc-latest,
-              cxx: g++-latest,
+              cc: gcc,
+              cxx: g++,
               arch: "x64-linux",
             }
           - {
               Name: Linux Clang,
               os: ubuntu-latest,
-              cc: clang-latest,
-              cxx: clang++-latest,
+              cc: clang,
+              cxx: clang++,
               arch: "x64-linux",
             }
           - {
               Name: MacOS Clang,
               os: macos-latest,
-              cc: clang-latest,
-              cxx: clang++-latest,
+              cc: clang,
+              cxx: clang++,
               arch: "x64-osx",
             }
         build_type: [Release, Debug]
