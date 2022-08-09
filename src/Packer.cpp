@@ -114,7 +114,7 @@ bool mpbp::Packer::tryPlaceSpace(mpbp::Rect& rect)
                                     space.GetHeight() - rect.GetHeight());
         }
       }
-      this->spaces[space_i] = this->spaces[this->spaces.size() - 1];
+      this->spaces[space_i] = this->spaces.back();
       this->spaces.pop_back();
       std::sort(this->spaces.begin(), this->spaces.end());
       return true;
