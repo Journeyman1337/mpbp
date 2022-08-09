@@ -21,6 +21,7 @@
 #include <algorithm>
 #include <mpbp/Packer.hpp>
 #include <stdexcept>
+#include <span>
 
 mpbp::Packer::Packer(int max_width, int max_height) noexcept
     : max_width(max_width), max_height(max_height)
