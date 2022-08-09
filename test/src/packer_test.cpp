@@ -71,6 +71,17 @@ SCENARIO("Packer is used to bin pack")
 
         THEN("No Rect intersect") { CHECK(noRectIntersect(rects)); }
       }
+
+      WHEN("The vector of Rect is cut in half and packed online")
+      {
+        auto half_way = rects.size() / 2;
+        std::span<mpbp::Rect> spana(rects.begin(), half_way);
+        std::span<mpbp::Rect> spanb(rects.begin() + half_way, rects.size() - half_way);
+        packer.Pack(spana);
+        packer.Pack(spanb);
+
+        THEN("No Rect intersect") { CHECK(noRectIntersect(rects)); }
+      }
     }
 
     GIVEN("A vector of Rect where one is larger than the Packer max dimensions")
