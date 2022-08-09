@@ -59,8 +59,8 @@ SCENARIO("Packer is used to bin pack")
       WHEN("The vector of Rect is cut in half and packed online")
       {
         auto half_way = rects.size() / 2;
-        std::span<mpbp::Rect> spana(rects.begin(), half_way);
-        std::span<mpbp::Rect> spanb(rects.begin() + half_way, rects.size() - half_way);
+        std::span<mpbp::Rect> spana(&rects.front(), half_way);
+        std::span<mpbp::Rect> spanb(&rects.front() + half_way, rects.size() - half_way);
         packer.Pack(spana);
         packer.Pack(spanb);
 
