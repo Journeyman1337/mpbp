@@ -193,7 +193,7 @@ void mpbp::Packer::spaceLeftoverPage()
   }
   if (this->top_bin_height < this->max_height)
   {
-    this->spaces.emplace_back(0, this->top_bin_height, this->top_bin_width,
+    this->spaces.emplace_back(0, this->top_bin_height, this->max_width,
                               this->max_height - this->top_bin_height, this->getTopPageI());
   }
 }
