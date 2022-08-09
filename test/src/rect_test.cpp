@@ -55,8 +55,20 @@ SCENARIO("The far coordinates of a Rect are determined")
   }
 }
 
-SCENARIO("A Rect is placed at a position and page")
+SCENARIO("The position of a Rect is determined")
 {
+  GIVEN("A Rect that is not placed with a width of 32 and a height of 64.")
+  {
+    mpbp::Rect rect(0, 32, 64);
+
+    THEN("The coordinates are (-1, -1, -1)")
+    {
+      CHECK(rect.GetX() == -1);
+      CHECK(rect.GetY() == -1);
+      CHECK(rect.GetZ() == -1);
+    }
+  }
+
   GIVEN("A Rect with a width and height of 5")
   {
     mpbp::Rect rect(0, 5, 5);
