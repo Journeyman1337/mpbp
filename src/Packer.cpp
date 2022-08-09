@@ -186,7 +186,7 @@ bool mpbp::Packer::tryPlaceExpandBin(mpbp::Rect& rect)
 
 void mpbp::Packer::spaceLeftoverPage()
 {
-  if (this->top_bin_width < this->max_height)
+  if (this->top_bin_width < this->max_width)
   {
     this->spaces.emplace_back(this->top_bin_width, 0, this->max_width - this->top_bin_width,
                               this->top_bin_height, this->getTopPageI());
