@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 Daniel Valcour <fossweeper@gmail.com>
+//
+// SPDX-License-Identifier: MIT
+
 #ifndef MPBP_SPACE_HPP
 #define MPBP_SPACE_HPP
 
