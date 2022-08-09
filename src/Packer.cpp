@@ -229,14 +229,14 @@ void mpbp::Packer::Pack(const std::span<mpbp::Rect> rects)
   }
   std::sort(rects.begin(), rects.end(), std::greater());
   std::size_t rect_i = 0;
-  auto rect = &rects[rect_i];
+  auto rect = &rects[rect_i++];
   if (rect->GetWidth() > this->max_width || rect->GetHeight() > this->max_height)
   {
     throw std::runtime_error("one or more rects do not fit in bin");
   }
   this->reserveSpaces(rects);
   auto top_page_i = [&]() -> int { return this->page_count - 1; };
-  auto next_rect = [&]() { rect = &rects[++rect_i]; };
+  auto next_rect = [&]() { rect = &rects[rect_i++]; };
   if (this->page_count == 0)
   {
     this->placeNewPage(*rect);
