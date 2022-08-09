@@ -103,8 +103,8 @@ bool mpbp::Packer::tryPlaceSpace(mpbp::Rect& rect)
         {
           // Place a space to the right of the rect that reaches down to the bottom of the
           // containing space.
-          this->spaces.emplace_back(rect.GetX(), rect.GetFarY() + 1, space.GetZ(), space.GetWidth(),
-                                    space.GetHeight() - rect.GetHeight());
+          this->spaces.emplace_back(rect.GetFarX() + 1, rect.GetY(), space.GetZ(),
+                                    space.GetWidth() - rect.GetWidth(), space.GetHeight());
         }
         // If there is leftover space bellow the rect within the containing space...
         if (rect.GetHeight() < space.GetHeight())
