@@ -16,10 +16,10 @@ bool noRectIntersect(std::vector<mpbp::Rect>& rects)
     for (std::size_t b_i = 0; b_i < rects.size(); b_i++)
     {
       auto& rectb = rects[b_i];
-      if (a_i != b_i && recta.GetZ() == rectb.GetZ())
+      if (a_i != b_i && recta.GetPage() == rectb.GetPage())
       {
-        if (recta.GetX() < rectb.GetFarX() && recta.GetFarX() > rectb.GetX() &&
-            recta.GetY() < rectb.GetFarY() && recta.GetFarY() > rectb.GetY())
+        if (recta.GetLeftX() < rectb.GetRightX() && recta.GetRightX() > rectb.GetLeftX() &&
+            recta.GetTopY() < rectb.GetBottomY() && recta.GetBottomY() > rectb.GetTopY())
         {
           return false;
         }

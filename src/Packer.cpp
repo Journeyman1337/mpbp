@@ -67,14 +67,14 @@ bool mpbp::Packer::tryPlaceSpace(mpbp::Rect& rect)
         if (rect.GetWidth() < space.GetWidth())
         {
           // Place a space to the right that reaches down to the bottom of the rect.
-          this->spaces.emplace_back(rect.GetFarX() + 1, rect.GetY(), space.GetZ(),
+          this->spaces.emplace_back(rect.GetLeftX() + rect.GetWidth(), rect.GetTopY(), space.GetZ(),
                                     space.GetWidth() - rect.GetWidth(), rect.GetHeight());
         }
         // If there is leftover space bellow the rect within the containing space...
         if (rect.GetHeight() < space.GetHeight())
         {
           // Place a space bellow that reaches to the right of the containing space.
-          this->spaces.emplace_back(rect.GetX(), rect.GetFarY() + 1, space.GetZ(), space.GetWidth(),
+          this->spaces.emplace_back(rect.GetLeftX(), rect.GetTopY() + rect.GetHeight(), space.GetZ(), space.GetWidth(),
                                     space.GetHeight() - rect.GetHeight());
         }
       }
@@ -87,14 +87,14 @@ bool mpbp::Packer::tryPlaceSpace(mpbp::Rect& rect)
         {
           // Place a space to the right of the rect that reaches down to the bottom of the
           // containing space.
-          this->spaces.emplace_back(rect.GetFarX() + 1, rect.GetY(), space.GetZ(),
+          this->spaces.emplace_back(rect.GetLeftX() + rect.GetWidth(), rect.GetTopY(), space.GetZ(),
                                     space.GetWidth() - rect.GetWidth(), space.GetHeight());
         }
         // If there is leftover space bellow the rect within the containing space...
         if (rect.GetHeight() < space.GetHeight())
         {
           // Place a space bellow the rect that reaches only to the width of the rect.
-          this->spaces.emplace_back(rect.GetX(), rect.GetFarY() + 1, space.GetZ(), rect.GetWidth(),
+          this->spaces.emplace_back(rect.GetLeftX(), rect.GetTopY() + rect.GetHeight(), space.GetZ(), rect.GetWidth(),
                                     space.GetHeight() - rect.GetHeight());
         }
       }
@@ -115,7 +115,7 @@ bool mpbp::Packer::tryPlaceExpandBin(mpbp::Rect& rect)
     this->top_bin_width += rect.GetWidth();
     if (rect.GetHeight() <= this->top_bin_height)
     {
-      spaces.emplace_back(rect.GetX(), rect.GetHeight(), this->getTopPageI(), rect.GetWidth(),
+      spaces.emplace_back(rect.GetLeftX(), rect.GetHeight(), this->getTopPageI(), rect.GetWidth(),
                           this->top_bin_height - rect.GetHeight());
     }
     if (this->page_count == 1)
@@ -129,7 +129,7 @@ bool mpbp::Packer::tryPlaceExpandBin(mpbp::Rect& rect)
     this->top_bin_height += rect.GetHeight();
     if (rect.GetWidth() <= this->top_bin_width)
     {
-      spaces.emplace_back(rect.GetWidth(), rect.GetY(), this->getTopPageI(),
+      spaces.emplace_back(rect.GetWidth(), rect.GetTopY(), this->getTopPageI(),
                           this->top_bin_width - rect.GetWidth(), rect.GetHeight());
     }
     if (this->page_count == 1)

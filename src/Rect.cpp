@@ -10,22 +10,22 @@ mpbp::Rect::Rect(std::size_t identifier, int width, int height) noexcept
 {
 }
 
-void mpbp::Rect::Place(int x, int y, int z) noexcept
+void mpbp::Rect::Place(int left_x, int top_y, int page) noexcept
 {
-  this->x = x;
-  this->y = y;
-  this->z = z;
+  this->left_x = left_x;
+  this->top_y = top_y;
+  this->page = page;
 }
 
-int mpbp::Rect::GetX() const noexcept { return this->x; }
+int mpbp::Rect::GetLeftX() const noexcept { return this->left_x; }
 
-int mpbp::Rect::GetY() const noexcept { return this->y; }
+int mpbp::Rect::GetTopY() const noexcept { return this->top_y; }
 
-int mpbp::Rect::GetZ() const noexcept { return this->z; }
+int mpbp::Rect::GetPage() const noexcept { return this->page; }
 
-int mpbp::Rect::GetFarX() const noexcept { return this->x + this->width - 1; }
+int mpbp::Rect::GetRightX() const noexcept { return this->left_x + this->width - 1; }
 
-int mpbp::Rect::GetFarY() const noexcept { return this->y + this->height - 1; }
+int mpbp::Rect::GetBottomY() const noexcept { return this->top_y + this->height - 1; }
 
 int mpbp::Rect::GetWidth() const noexcept { return this->width; }
 

@@ -7,10 +7,10 @@
 #include <functional>
 #include <mpbp/Rect.hpp>
 
-mpbp::Rect createRect(std::size_t identifier, int x, int y, int z, int width, int height)
+mpbp::Rect createRect(std::size_t identifier, int left_x, int top_y, int page, int width, int height)
 {
   mpbp::Rect rect(identifier, width, height);
-  rect.Place(x, y, z);
+  rect.Place(left_x, top_y, page);
   return rect;
 }
 
@@ -22,8 +22,8 @@ SCENARIO("The far coordinates of a Rect are determined")
 
     THEN("The far coordinates are (4, 4)")
     {
-      CHECK(rect.GetFarX() == 4);
-      CHECK(rect.GetFarY() == 4);
+      CHECK(rect.GetRightX() == 4);
+      CHECK(rect.GetBottomY() == 4);
     }
   }
 
@@ -33,8 +33,8 @@ SCENARIO("The far coordinates of a Rect are determined")
 
     THEN("The far coordinates are (49, 69)")
     {
-      CHECK(rect.GetFarX() == 49);
-      CHECK(rect.GetFarY() == 69);  // nice
+      CHECK(rect.GetRightX() == 49);
+      CHECK(rect.GetBottomY() == 69);  // nice
     }
   }
 }
@@ -47,9 +47,9 @@ SCENARIO("The position of a Rect is determined")
 
     THEN("The coordinates are (-1, -1, -1)")
     {
-      CHECK(rect.GetX() == -1);
-      CHECK(rect.GetY() == -1);
-      CHECK(rect.GetZ() == -1);
+      CHECK(rect.GetLeftX() == -1);
+      CHECK(rect.GetTopY() == -1);
+      CHECK(rect.GetPage() == -1);
     }
   }
 
@@ -63,9 +63,9 @@ SCENARIO("The position of a Rect is determined")
 
       THEN("The Rect X Y and Z positions are (0, 0, 0)")
       {
-        CHECK(rect.GetX() == 0);
-        CHECK(rect.GetY() == 0);
-        CHECK(rect.GetZ() == 0);
+        CHECK(rect.GetLeftX() == 0);
+        CHECK(rect.GetTopY() == 0);
+        CHECK(rect.GetPage() == 0);
       }
     }
 
@@ -75,9 +75,9 @@ SCENARIO("The position of a Rect is determined")
 
       THEN("The Rect X Y and Z positons are (10, 20, 30)")
       {
-        CHECK(rect.GetX() == 10);
-        CHECK(rect.GetY() == 20);
-        CHECK(rect.GetZ() == 30);
+        CHECK(rect.GetLeftX() == 10);
+        CHECK(rect.GetTopY() == 20);
+        CHECK(rect.GetPage() == 30);
       }
     }
   }

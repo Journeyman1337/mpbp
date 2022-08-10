@@ -20,9 +20,9 @@ namespace mpbp
   {
    private:
     std::size_t identifier = 0;
-    int x = -1;
-    int y = -1;
-    int z = -1;
+    int left_x = -1;
+    int top_y = -1;
+    int page = -1;
     int width = 0;
     int height = 0;
 
@@ -46,41 +46,41 @@ namespace mpbp
      * 
      * This function is used to place a Rect at a specific position within a set of bin pages. Before this function is called, the x, y and z values are all -1. This function is used within the packing algorithm, and is usually not useful for end user use.
      * 
-     * @param x The x coordinate of the top left corner of the Rect.
-     * @param y The y coordinate of the top left corner of the Rect.
-     * @param z The bin page that the Rect exists on.
+     * @param left_x The x coordinate of the left side of the Rect.
+     * @param top_y The y coordinate of the top side of the Rect.
+     * @param page The bin page that the Rect exists on.
      */
-    void Place(int x, int y, int z) noexcept;
+    void Place(int left_x, int top_y, int page) noexcept;
     /**
      * @brief Get the x coordinate of the left side of the Rect.
      * 
      * @return The x coordinate of the left side of the Rect.
      */
-    int GetX() const noexcept;
+    int GetLeftX() const noexcept;
     /**
      * @brief Get the y coordinate of the top side of the Rect.
      * 
      * @return The y coordinate of the top side of the Rect.
      */
-    int GetY() const noexcept;
+    int GetTopY() const noexcept;
     /**
      * @brief Get the bin page that the Rect exists on.
      * 
      * @return The index of the bin page this Rect eixts on.
      */
-    int GetZ() const noexcept;
+    int GetPage() const noexcept;
     /**
      * @brief Get the x coordinate of the right side of the Rect.
      * 
      * @return The x coordinate of the right side of the Rect.
      */
-    int GetFarX() const noexcept;
+    int GetRightX() const noexcept;
     /**
      * @brief Get the y coordinate of the bottom side of the Rect.
      * 
      * @return The y coordinate of the bottom side of the Rect.
      */
-    int GetFarY() const noexcept;
+    int GetBottomY() const noexcept;
     /**
      * @brief Get the width of the Rect.
      * 
