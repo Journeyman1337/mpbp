@@ -15,9 +15,9 @@ SCENARIO("Properties are retrieved from a Space")
     THEN("The getters return the correct values")
     {
       REQUIRE(!space.GetIsDegenerate());
-      CHECK(space.GetX() == 5);
-      CHECK(space.GetY() == 10);
-      CHECK(space.GetZ() == 15);
+      CHECK(space.GetLeftX() == 5);
+      CHECK(space.GetTopY() == 10);
+      CHECK(space.GetPage() == 15);
       CHECK(space.GetWidth() == 20);
       CHECK(space.GetHeight() == 25);
       CHECK(space.GetMaxDimension() == 25);

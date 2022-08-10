@@ -21,9 +21,9 @@ namespace mpbp
   {
    private:
     int max_dimension = 0;
-    int x = 0;
-    int y = 0;
-    int z = 0;
+    int left_x = 0;
+    int top_y = 0;
+    int page = 0;
     int width = 0;
     int height = 0;
 
@@ -37,31 +37,31 @@ namespace mpbp
     /**
      * @brief Construct a new Space object at the given coordinates and page with the given width and height.
      * 
-     * @param x The x coordinate position of the top left corner of the Space.
-     * @param y The y coordinate position of the top left corner of the Space.
-     * @param z The bin page that this Space exists on.
+     * @param left_x The x coordinate position of the top left corner of the Space.
+     * @param top_y The y coordinate position of the top left corner of the Space.
+     * @param page The bin page that this Space exists on.
      * @param width The width of the Space.
      * @param height The height of the Space.
      */
-    Space(int x, int y, int z, int width, int height) noexcept;
+    Space(int left_x, int top_y, int page, int width, int height) noexcept;
     /**
      * @brief Get the x coordinate of the left side of the Space.
      * 
      * @return The x coordinate of the left side of the Space.
      */
-    int GetX() const noexcept;
+    int GetLeftX() const noexcept;
     /**
      * @brief Get the y coordinate of the top side of the Space.
      * 
      * @return The y coordinate of the top side of the Space.
      */
-    int GetY() const noexcept;
+    int GetTopY() const noexcept;
     /**
      * @brief Get the bin page that the Space exists on.
      * 
      * @return The index of the bin page this Space exists on.
      */
-    int GetZ() const noexcept;
+    int GetPage() const noexcept;
     /**
      * @brief Get the width of the Space.
      * 

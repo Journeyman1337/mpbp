@@ -59,7 +59,7 @@ bool mpbp::Packer::tryPlaceSpace(mpbp::Rect& rect)
     auto& space = this->spaces[space_i];
     if (space.Fits(rect))
     {
-      rect.Place(space.GetX(), space.GetY(), space.GetZ());
+      rect.Place(space.GetLeftX(), space.GetTopY(), space.GetPage());
       // If the extra space to the right of the rect is greater than the extra space bellow...
       if (space.GetWidth() - rect.GetWidth() > space.GetHeight() - rect.GetHeight())
       {
@@ -67,14 +67,14 @@ bool mpbp::Packer::tryPlaceSpace(mpbp::Rect& rect)
         if (rect.GetWidth() < space.GetWidth())
         {
           // Place a space to the right that reaches down to the bottom of the rect.
-          this->spaces.emplace_back(rect.GetLeftX() + rect.GetWidth(), rect.GetTopY(), space.GetZ(),
+          this->spaces.emplace_back(rect.GetLeftX() + rect.GetWidth(), rect.GetTopY(), space.GetPage(),
                                     space.GetWidth() - rect.GetWidth(), rect.GetHeight());
         }
         // If there is leftover space bellow the rect within the containing space...
         if (rect.GetHeight() < space.GetHeight())
         {
           // Place a space bellow that reaches to the right of the containing space.
-          this->spaces.emplace_back(rect.GetLeftX(), rect.GetTopY() + rect.GetHeight(), space.GetZ(), space.GetWidth(),
+          this->spaces.emplace_back(rect.GetLeftX(), rect.GetTopY() + rect.GetHeight(), space.GetPage(), space.GetWidth(),
                                     space.GetHeight() - rect.GetHeight());
         }
       }
@@ -87,14 +87,14 @@ bool mpbp::Packer::tryPlaceSpace(mpbp::Rect& rect)
         {
           // Place a space to the right of the rect that reaches down to the bottom of the
           // containing space.
-          this->spaces.emplace_back(rect.GetLeftX() + rect.GetWidth(), rect.GetTopY(), space.GetZ(),
+          this->spaces.emplace_back(rect.GetLeftX() + rect.GetWidth(), rect.GetTopY(), space.GetPage(),
                                     space.GetWidth() - rect.GetWidth(), space.GetHeight());
         }
         // If there is leftover space bellow the rect within the containing space...
         if (rect.GetHeight() < space.GetHeight())
         {
           // Place a space bellow the rect that reaches only to the width of the rect.
-          this->spaces.emplace_back(rect.GetLeftX(), rect.GetTopY() + rect.GetHeight(), space.GetZ(), rect.GetWidth(),
+          this->spaces.emplace_back(rect.GetLeftX(), rect.GetTopY() + rect.GetHeight(), space.GetPage(), rect.GetWidth(),
                                     space.GetHeight() - rect.GetHeight());
         }
       }

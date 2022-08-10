@@ -6,16 +6,16 @@
 #include <mpbp/Rect.hpp>
 #include <mpbp/Space.hpp>
 
-mpbp::Space::Space(int x, int y, int z, int width, int height) noexcept
-    : x(x), y(y), z(z), width(width), height(height), max_dimension(std::max(width, height))
+mpbp::Space::Space(int left_x, int top_y, int page, int width, int height) noexcept
+    : left_x(left_x), top_y(top_y), page(page), width(width), height(height), max_dimension(std::max(width, height))
 {
 }
 
-int mpbp::Space::GetX() const noexcept { return this->x; }
+int mpbp::Space::GetLeftX() const noexcept { return this->left_x; }
 
-int mpbp::Space::GetY() const noexcept { return this->y; }
+int mpbp::Space::GetTopY() const noexcept { return this->top_y; }
 
-int mpbp::Space::GetZ() const noexcept { return this->z; }
+int mpbp::Space::GetPage() const noexcept { return this->page; }
 
 int mpbp::Space::GetWidth() const noexcept { return this->width; }
 
