@@ -14,10 +14,12 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(MPBP_CXX_STANDARD 20)
 
-option(MPBP_BUILD_EXAMPLE "Build the mpbp example project" OFF)
-option(MPBP_BUILD_TESTS "Build the mpbp automatic test framework" OFF)
+option(MPBP_BUILD_DOCUMENTATION "Build the documentation using Doxygen." ON)
+option(MPBP_BUILD_EXAMPLE "Build the mpbp example project." OFF)
+option(MPBP_BUILD_TESTS "Build the mpbp automatic test framework." OFF)
 option(MPBP_INSTALL "Generate the mpbp installation target." ON)
 
+set(MPBP_CMAKE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 set(MPBP_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 set(MPBP_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/")
 
@@ -64,7 +66,7 @@ target_include_directories(${PROJECT_NAME}
 
 target_precompile_headers(${PROJECT_NAME}
     PUBLIC
-    	${MPBP_INCLUDE_FILES}
+        ${MPBP_INCLUDE_FILES}
 )
 
 set_target_properties(${PROJECT_NAME}
@@ -75,25 +77,29 @@ set_target_properties(${PROJECT_NAME}
 )
 
 if (MPBP_BUILD_TESTS)
-	add_subdirectory(test)
+    add_subdirectory(test)
 endif()
 
 if (MPBP_BUILD_EXAMPLE)
     add_subdirectory(example)
 endif()
 
+if (MPBP_BUILD_DOCUMENTATION)
+    add_subdirectory(docs)
+endif()
+
 if (MPBP_INSTALL)
-	include(GNUInstallDirs)
-	target_include_directories(${PROJECT_NAME}
-		PUBLIC
-			"$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
-	)
-	install(TARGETS ${PROJECT_NAME}
-		EXPORT mpbpTargets
-		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-	)
+    include(GNUInstallDirs)
+    target_include_directories(${PROJECT_NAME}
+        PUBLIC
+            "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+    )
+    install(TARGETS ${PROJECT_NAME}
+        EXPORT mpbpTargets
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    )
     install(EXPORT mpbpTargets FILE mpbpConfig.cmake
         EXPORT_LINK_INTERFACE_LIBRARIES
         DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/mpbp/"
@@ -102,8 +108,8 @@ if (MPBP_INSTALL)
     install(FILES ${MPBP_INCLUDE_FILES}
             DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     )
-	export(TARGETS ${PROJECT_NAME}
-		NAMESPACE mpbp::
-		FILE "${CMAKE_CURRENT_BINARY_DIR}/mpbpConfig.cmake"
-	)
+    export(TARGETS ${PROJECT_NAME}
+        NAMESPACE mpbp::
+        FILE "${CMAKE_CURRENT_BINARY_DIR}/mpbpConfig.cmake"
+    )
 endif()

@@ -4,6 +4,7 @@
 
 cmake_minimum_required(VERSION 3.19)
 find_package(Catch2 CONFIG REQUIRED)
+
 set(MPBP_TEST_SOURCES
     "space_test.cpp"
     "rect_test.cpp"
