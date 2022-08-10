@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2022 Daniel Valcour <fossweeper@gmail.com>
+#
+# SPDX-License-Identifier: MIT
+
 find_package(Doxygen)
 
 if (NOT DOXYGEN_FOUND)
