@@ -25,8 +25,8 @@ int main()
         bool rect_found = false;
         for (const auto& rect : input_rects)
         {
-          if (rect.GetZ() == page && rect.GetX() <= x && rect.GetY() <= y && rect.GetFarX() >= x &&
-              rect.GetFarY() >= y)
+          if (rect.GetPage() == page && rect.GetLeftX() <= x && rect.GetTopY() <= y && rect.GetRightX() >= x &&
+              rect.GetBottomY() >= y)
           {
             std::cout << rect.GetIdentifier();
             rect_found = true;
