@@ -43,7 +43,7 @@ namespace mpbp
     /**
      * @brief Place a Rect at the given position.
      * 
-     * This function is used to place a Rect at a specific position within a set of bin pages. Before this function is called, the x, y and z values are all -1. This function is used within the packing algorithm, and is usually not useful for end user use.
+     * This function is used to place a Rect at a specific position within a set of bin pages. Before this function is called, the left_x, top_y and page values are all -1. This function is used within the packing algorithm, and is usually not useful for end user use.
      * 
      * @param left_x The x coordinate of the left side of the Rect.
      * @param top_y The y coordinate of the top side of the Rect.
