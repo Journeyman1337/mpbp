@@ -5,7 +5,7 @@
 #include <cmath>
 #include <mpbp/Rect.hpp>
 
-mpbp::Rect::Rect(std::size_t identifier, int width, int height) noexcept
+mpbp::Rect::Rect(unsigned long int identifier, int width, int height) noexcept
     : identifier(identifier), width(width), height(height)
 {
 }
@@ -31,7 +31,7 @@ int mpbp::Rect::GetWidth() const noexcept { return this->width; }
 
 int mpbp::Rect::GetHeight() const noexcept { return this->height; }
 
-std::size_t mpbp::Rect::GetIdentifier() const noexcept { return this->identifier; }
+unsigned long int mpbp::Rect::GetIdentifier() const noexcept { return this->identifier; }
 
 int mpbp::Rect::GetMaxDimension() const noexcept { return std::max(this->width, this->height); }
 

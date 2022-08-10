@@ -7,7 +7,6 @@
 
 #include <cmath>
 #include <compare>
-#include <cstddef>
 
 namespace mpbp
 {
@@ -19,7 +18,7 @@ namespace mpbp
   class Rect
   {
    private:
-    std::size_t identifier = 0;
+    unsigned long int identifier = 0;
     int left_x = -1;
     int top_y = -1;
     int page = -1;
@@ -40,7 +39,7 @@ namespace mpbp
      * @param width The width of the Rect.
      * @param height The height of the Rect.
      */
-    Rect(std::size_t identifier, int width, int height) noexcept;
+    Rect(unsigned long int identifier, int width, int height) noexcept;
     /**
      * @brief Place a Rect at the given position.
      * 
@@ -100,7 +99,7 @@ namespace mpbp
      * 
      * @return The identifier of this Rect.
      */
-    std::size_t GetIdentifier() const noexcept;
+    unsigned long int GetIdentifier() const noexcept;
     /**
      * @brief Get the size of the largest dimension of this Rect.
      * 
