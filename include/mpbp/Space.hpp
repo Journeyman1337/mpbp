@@ -9,14 +9,14 @@
 
 namespace mpbp
 {
+  struct Rect;
+  
   /**
    * @brief An axis-alligned rectangular space between packed Rect in a set of bin pages.
    * 
    * This class is used internally by the pack algorithm to keep track of spaces between Rect. It has little use to end users in most situations.
    * 
    */
-  struct Rect;
-
   class Space
   {
    private:
