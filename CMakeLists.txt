@@ -15,9 +15,10 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(MPBP_CXX_STANDARD 20)
 
 option(MPBP_BUILD_DOCUMENTATION "Build the documentation using Doxygen." ON)
-option(MPBP_BUILD_EXAMPLE "Build the mpbp example project." OFF)
-option(MPBP_BUILD_TESTS "Build the mpbp automatic test framework." OFF)
-option(MPBP_INSTALL "Generate the mpbp installation target." ON)
+option(MPBP_BUILD_LIBRARY "Build the mpbp library" ON)
+option(MPBP_BUILD_EXAMPLE "Build the mpbp example project. Requires MPBP_BUILD_LIBRARY to be ON." OFF)
+option(MPBP_BUILD_TESTS "Build the mpbp automatic test framework. Requires MPBP_BUILD_LIBRARY to be ON." OFF)
+option(MPBP_INSTALL "Generate the mpbp installation target. Requires MPBP_BUILD_LIBRARY to be ON." ON)
 
 set(MPBP_CMAKE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 set(MPBP_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/")
@@ -77,10 +78,16 @@ set_target_properties(${PROJECT_NAME}
 )
 
 if (MPBP_BUILD_TESTS)
+    if (NOT MPBP_BUILD_LIBRARY)
+        message(SEND_ERROR "Unable to generate mpbp test executable: mpbp library not built.")
+    endif()
     add_subdirectory(test)
 endif()
 
 if (MPBP_BUILD_EXAMPLE)
+    if (NOT MPBP_BUILD_LIBRARY)
+        message(SEND_ERROR "Unable to generate mpbp example executable: mpbp library not built.")
+    endif()
     add_subdirectory(example)
 endif()
 
@@ -89,6 +96,9 @@ if (MPBP_BUILD_DOCUMENTATION)
 endif()
 
 if (MPBP_INSTALL)
+    if (NOT MPBP_BUILD_LIBRARY)
+        message(SEND_ERROR "Unable to install mpbp: mpbp library not built.")
+    endif()
     include(GNUInstallDirs)
     target_include_directories(${PROJECT_NAME}
         PUBLIC
