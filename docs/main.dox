@@ -18,7 +18,7 @@ To use mpbp, you must first create a mpbp::Packer object and specify the maximum
     int max_height = 16;
     mpbp::Packer::packer(max_width, max_height);
 
-In order to pack, you must provide a <a href="https://en.cppreference.com/w/cpp/container/span">std::span</a> of mpbp::Rect. An easy way to do this is to store the mpbp::Rect objects in a <a href="https://en.cppreference.com/w/cpp/container/vector">std::vector</a>, which will be implicitly converted to a span when you pass it into the packing function. Construct each rect using the overloaded constructor with three arguments. For the first argument, pass in an `unsigned long int` identifier value which will be used to identify this Rect later. For the second and third arguments, pass in the width and height of the Rect.
+In order to pack, you must provide a <a href="https://en.cppreference.com/w/cpp/container/span">std::span</a> of mpbp::Rect. An easy way to do this is to store the mpbp::Rect objects in a <a href="https://en.cppreference.com/w/cpp/container/vector">std::vector</a>, which will be implicitly converted to a span when you pass it into the packing function. Construct each Rect using the overloaded constructor with three arguments. For the first argument, pass in an `unsigned long int` identifier value which will be used to identify this Rect later. For the second and third arguments, pass in the width and height of the Rect.
 
       std::vector<mpbp::Rect> input_rects = {
         mpbp::Rect(0, 1, 1), mpbp::Rect(1, 2, 2),  mpbp::Rect(2, 4, 4), mpbp::Rect(3, 5, 5),
@@ -29,7 +29,7 @@ To perform a pack, pass vector of Rect objects into the mpbp::Packer::Pack() fun
 
     packer.Pack(input_rects);
 
-After the Rect objects are packed, loop through them and use their getter functions to get their positions in the bin pages. You can use mpbp::Packer::GetPageCount() to get the total amount of pages that were packed. Remember that after packing, the Rect objects are no longer the same order in their container. To determine which Rect is which, check the identifier value that you set earlier, which you can get with the mpbp::Rect::GetIdentifier() function.
+After the Rect objects are packed, loop through them and use their getter functions to get their positions in the bin pages. You can use mpbp::Packer::GetPageCount() to get the total amount of pages that were packed. After packing, the Rect objects are no longer the same order in their container. To determine which Rect is which, check the identifier value that you set earlier. You can get this value from a Rect object using the mpbp::Rect::GetIdentifier() function.
 
 If you wish to pack more Rect objects with the Packer object, you can do so by creating a new container of Rect objects and calling the Pack function again. You can do this as many times as you like, but note that the more times you call the pack algorithm, the less space efficient it will be. Alternatively, you can clear the Packer object of all state data by calling the mpbp::Packer::Clear() function, and then you can pack your Rect objects again from scratch including any new additions.
 
