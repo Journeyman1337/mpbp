@@ -120,7 +120,7 @@ namespace mpbp
     /**
      * @brief Run the pack algorithm with the given span of Rect.
      * 
-     * @param The span of Rect to pack. 
+     * @param rects The span of Rect to pack. 
      */
     void Pack(const std::span<mpbp::Rect> rects);
   };
