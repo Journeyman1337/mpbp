@@ -11,7 +11,7 @@
 namespace mpbp
 {
   /**
-   * @brief Bin packable axis-alligned rectangle.
+   * @brief A bin packable axis-alligned rectangle.
    * 
    * This class is used to define the sizes of rectangles to pack. When packing is complete, the positions that the rectangles were packed can be retrieved from the getters of this class.
    */

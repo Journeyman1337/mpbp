@@ -13,7 +13,7 @@
 namespace mpbp
 {
   /**
-   * @brief Bin packing algorithm runner and state machine.
+   * @brief A bin packing algorithm runner and state machine.
    * 
    * This class stores all state data used for bin packing, and is used to perform bin packs.
    */
