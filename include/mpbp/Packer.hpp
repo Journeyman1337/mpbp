@@ -15,7 +15,8 @@ namespace mpbp
   /**
    * @brief A bin packing algorithm runner and state machine.
    * 
-   * This class stores all state data used for bin packing, and is used to perform bin packs.
+   * This class is used to pack Rect into a series of bin pages. Pages are added only as needed, and will never be larger than the maximum width and height. If doing online packing, this class can be used to maintain packing information between packs.
+   * 
    */
   class Packer
   {

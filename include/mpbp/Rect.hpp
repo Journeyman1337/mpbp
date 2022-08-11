@@ -14,6 +14,7 @@ namespace mpbp
    * @brief A bin packable axis-alligned rectangle.
    * 
    * This class is used to define the sizes of rectangles to pack. When packing is complete, the positions that the rectangles were packed can be retrieved from the getters of this class.
+   * 
    */
   class Rect
   {
@@ -95,7 +96,7 @@ namespace mpbp
     /**
      * @brief Get the value used to idenitfy this Rect.
      * 
-     * This value is used to differentiate this Rect from other Rect in its span during packing.
+     * This value is used to differentiate this Rect from other Rect in its span after packing.
      * 
      * @return The identifier of this Rect.
      */
