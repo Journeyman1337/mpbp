@@ -6,7 +6,8 @@ SPDX-License-Identifier: MIT
 
 # Multi Page Bin Packing Library
 
-[![Tests](https://github.com/Journeyman-dev/mpbp/actions/workflows/Test.yaml/badge.svg)](https://github.com/Journeyman-dev/mpbp/actions/workflows/Test.yaml)
+[![Tests](https://github.com/Journeyman-dev/mpbp/actions/workflows/Test.yaml/badge.svg)](https://github.com/Journeyman-dev/mpbp/actions/workflows/Test.yaml) (https://github.com/Journeyman-dev/FossSweeper/actions/workflows/Tests.yaml) [![REUSE status](https://api.reuse.software/badge/git.fsfe.org/reuse/api)](https://api.reuse.software/info/git.fsfe.org/reuse/api)
+
 
 Documentation Website: https://journeyman-dev.github.io/mpbp/
 
