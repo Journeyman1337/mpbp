@@ -46,7 +46,7 @@ bool noInvalidSpace(std::vector<mpbp::Space> spaces)
 {
   for (const auto& space : spaces)
   {
-    if (space.GetLeftX() < 0 || space.GetTopY() < 0 || space.GetPage() < 0 || space.GetWidth() <= 0 || space.GetHeight() <= 0)
+    if (space.GetIsDegenerate())
     {
       return false;
     }
