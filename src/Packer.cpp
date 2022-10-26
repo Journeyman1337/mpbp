@@ -172,13 +172,13 @@ void mpbp::Packer::spaceLeftoverPage()
 {
   if (this->top_bin_width < this->max_width)
   {
-    this->spaces.emplace_back(this->top_bin_width, 0, this->max_width - this->top_bin_width,
-                              this->top_bin_height, this->getTopPageI());
+    this->spaces.emplace_back(this->top_bin_width, 0, this->getTopPageI(), this->max_width - this->top_bin_width,
+                              this->top_bin_height);
   }
   if (this->top_bin_height < this->max_height)
   {
-    this->spaces.emplace_back(0, this->top_bin_height, this->max_width,
-                              this->max_height - this->top_bin_height, this->getTopPageI());
+    this->spaces.emplace_back(0, this->top_bin_height, this->getTopPageI(), this->max_width,
+                              this->max_height - this->top_bin_height);
   }
 }
 
@@ -190,6 +190,11 @@ void mpbp::Packer::placeNewPage(mpbp::Rect& rect)
   {
     this->width = rect.GetWidth();
     this->height = rect.GetHeight();
+  }
+  else
+  {
+    this->width = this->max_width;
+    this->height = this->max_height;
   }
   this->top_bin_width = rect.GetWidth();
   this->top_bin_height = rect.GetHeight();
