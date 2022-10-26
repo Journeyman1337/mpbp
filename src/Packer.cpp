@@ -113,7 +113,7 @@ bool mpbp::Packer::tryPlaceExpandBin(mpbp::Rect& rect)
   {
     rect.Place(this->top_bin_width, 0, this->getTopPageI());
     this->top_bin_width += rect.GetWidth();
-    if (rect.GetHeight() <= this->top_bin_height)
+    if (rect.GetHeight() < this->top_bin_height)
     {
       spaces.emplace_back(rect.GetLeftX(), rect.GetHeight(), this->getTopPageI(), rect.GetWidth(),
                           this->top_bin_height - rect.GetHeight());
@@ -127,7 +127,7 @@ bool mpbp::Packer::tryPlaceExpandBin(mpbp::Rect& rect)
   {
     rect.Place(0, this->top_bin_height, this->getTopPageI());
     this->top_bin_height += rect.GetHeight();
-    if (rect.GetWidth() <= this->top_bin_width)
+    if (rect.GetWidth() < this->top_bin_width)
     {
       spaces.emplace_back(rect.GetWidth(), rect.GetTopY(), this->getTopPageI(),
                           this->top_bin_width - rect.GetWidth(), rect.GetHeight());
