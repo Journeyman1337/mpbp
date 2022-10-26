@@ -3,8 +3,13 @@
 # SPDX-License-Identifier: MIT
 
 cmake_minimum_required(VERSION 3.19)
-find_package(Catch2 CONFIG REQUIRED)
-
+Include(FetchContent)
+FetchContent_Declare(
+    Catch2
+    GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+    GIT_TAG        v3.1.0
+)
+FetchContent_MakeAvailable(Catch2)
 set(MPBP_TEST_SOURCES
     "space_test.cpp"
     "rect_test.cpp"

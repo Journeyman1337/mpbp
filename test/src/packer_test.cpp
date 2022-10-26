@@ -5,6 +5,7 @@
 #include <catch2/catch_all.hpp>
 #include <mpbp/Packer.hpp>
 #include <mpbp/Rect.hpp>
+#include <mpbp/Space.hpp>
 #include <vector>
 #include <cstddef>
 
@@ -24,6 +25,30 @@ bool noRectIntersect(std::vector<mpbp::Rect>& rects)
           return false;
         }
       }
+    }
+  }
+  return true;
+}
+
+bool noUnplacedRect(std::vector<mpbp::Rect>& rects)
+{
+  for(const auto& rect : rects)
+  {
+    if (rect.GetLeftX() < 0 || rect.GetRightX() < 0 || rect.GetPage() < 0)
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool noInvalidSpace(std::vector<mpbp::Space> spaces)
+{
+  for (const auto& space : spaces)
+  {
+    if (space.GetIsDegenerate())
+    {
+      return false;
     }
   }
   return true;
@@ -54,6 +79,8 @@ SCENARIO("Packer is used to bin pack")
         packer.Pack(rects);
 
         THEN("No Rect intersect") { CHECK(noRectIntersect(rects)); }
+        THEN("All rects are placed") { CHECK(noUnplacedRect(rects)); }
+        THEN("No spaces are invalid") { CHECK(noInvalidSpace(packer.GetSpaces())); }
       }
 
       WHEN("The vector of Rect is cut in half and packed online")
@@ -65,6 +92,8 @@ SCENARIO("Packer is used to bin pack")
         packer.Pack(spanb);
 
         THEN("No Rect intersect") { CHECK(noRectIntersect(rects)); }
+        THEN("All rects are placed") { CHECK(noUnplacedRect(rects)); }
+        THEN("No spaces are invalid") { CHECK(noInvalidSpace(packer.GetSpaces())); }
       }
     }
 
