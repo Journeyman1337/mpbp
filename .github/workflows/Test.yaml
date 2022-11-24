@@ -45,7 +45,7 @@ jobs:
       CXX: ${{ matrix.platform.cxx }}
     steps:
       - name: checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: log CMake version
         shell: bash
         run: cmake --version
@@ -65,7 +65,7 @@ jobs:
         shell: bash
         run: sudo apt-get update
       - name: archive vcpkg packages in cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ github.workspace }}/vcpkg/downloads/
           key: ${{ runner.os }}-vcpkg-downloads-${{ matrix.platform.os }}-${{ github.sha }}
@@ -97,12 +97,12 @@ jobs:
         run: ctest -C ${{ matrix.build_type }}
         continue-on-error: true
       - name: JUnit report
-        uses: mikepenz/action-junit-report@v3.2.0
+        uses: mikepenz/action-junit-report@v3.6.1
         with:
           report_paths: "**/unittests.*.xml"
           require_tests: true
           fail_on_failure: true
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: ${{ failure() }}
         with:
           name: vcpkg-logs
