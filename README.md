@@ -4,10 +4,6 @@ SPDX-FileCopyrightText: 2022 Daniel Valcour <fosssweeper@gmail.com>
 SPDX-License-Identifier: MIT
 -->
 
-# Why was this depreciated?
-
-The algorithm used in this library has found a new home in the Roguelike Math Library (<https://github.com/Journeyman-dev/rlm>). You should use that library instead.
-
 # Multi Page Bin Packing Library
 
 [![Tests](https://github.com/Journeyman-dev/mpbp/actions/workflows/Test.yaml/badge.svg)](https://github.com/Journeyman-dev/FossSweeper/actions/workflows/Tests.yaml) [![REUSE status](https://api.reuse.software/badge/git.fsfe.org/reuse/api)](https://api.reuse.software/info/git.fsfe.org/reuse/api)
