@@ -4,6 +4,10 @@ SPDX-FileCopyrightText: 2022 Daniel Valcour <fosssweeper@gmail.com>
 SPDX-License-Identifier: MIT
 -->
 
+## Archive Notice
+
+This project has been archived until further notice. Feel free to fork it and make changes.
+
 # Multi Page Bin Packing Library
 
 [![Tests](https://github.com/Journeyman-dev/mpbp/actions/workflows/Test.yaml/badge.svg)](https://github.com/Journeyman-dev/FossSweeper/actions/workflows/Tests.yaml) [![REUSE status](https://api.reuse.software/badge/git.fsfe.org/reuse/api)](https://api.reuse.software/info/git.fsfe.org/reuse/api)
